@@ -8,9 +8,16 @@ namespace Chess.Controllers
 {
     class ChessController
     {
+        private static string filePath;
+
         public static void Run()
         {
 
+        }
+
+        public static void SetMoveFilePath(string loadPath)
+        {
+            filePath = loadPath;
         }
     }
 }
