@@ -4,15 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Chess.Controllers;
-
-namespace Chess
+namespace Chess.Controllers
 {
-    class Program
+    class ChessController
     {
-        static void Main(string[] args)
+        public static void Run()
         {
-            ChessController.Run();
+
         }
     }
 }
