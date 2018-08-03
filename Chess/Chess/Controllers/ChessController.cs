@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,12 +13,39 @@ namespace Chess.Controllers
 
         public static void Run()
         {
+            SetMoveFilePath("");
+            List<String> moves = LoadMoveFile();
 
+            moves.ForEach(i => Console.WriteLine(i));
         }
 
         public static void SetMoveFilePath(string loadPath)
         {
             filePath = loadPath;
+        }
+
+        public static List<String> LoadMoveFile()
+        {
+            List<String> moves = new List<string>();
+            StreamReader reader = new StreamReader(filePath);
+
+            try
+            {
+                do
+                {
+                    moves.Add(reader.ReadLine());
+                }
+                while (reader.Peek() != -1);
+            }
+
+            catch
+            {
+                moves.Add("File is empty");
+            }
+
+            reader.Close();
+
+            return moves;
         }
     }
 }
