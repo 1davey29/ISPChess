@@ -172,12 +172,18 @@ namespace Chess.Controllers
 
         private static void MoveOnePiece(String move)
         {
+            String[] moveSteps = move.Split(' ');
 
+            Console.WriteLine($"Piece moved from {moveSteps[0]} to {moveSteps[1]}");
         }
 
         private static void MoveTwoPieces(String move)
         {
+            String[] moves = move.Split(' ');
+            String[] move1Steps = { moves[0], moves[1] };
+            String[] move2Steps = { moves[2], moves[3] };
 
+            Console.WriteLine($"Piece moved from {move1Steps[0]} to {move1Steps[1]}, and piece moved from {move2Steps[0]} to {move2Steps[1]}");
         }
     }
 }
