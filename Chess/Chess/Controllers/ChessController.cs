@@ -13,7 +13,49 @@ namespace Chess.Controllers
 
         public static void Run()
         {
+            Console.Write("Please enter the file path of your move file: ");
 
+            SetMoveFilePath(Console.ReadLine());
+
+            List<String> moves = LoadMoveFile();
+
+            foreach (String move in moves)
+            {
+                int type = RecognizeMoveType(move);
+
+                switch (type)
+                {
+                    case 1:
+
+                        PlacePiece(move);
+
+                        break;
+
+                    case 2:
+
+                        MoveOnePiece(move);
+
+                        break;
+
+                    case 3:
+
+                        MoveTwoPieces(move);
+
+                        break;
+
+                    case 0:
+
+                        Console.WriteLine("Invalid Move");
+
+                        break;
+
+                    default:
+
+                        Console.WriteLine("Error in code");
+
+                        break;
+                }
+            }
         }
 
         public static void SetMoveFilePath(string loadPath)
