@@ -44,5 +44,25 @@ namespace Chess.Controllers
 
             return moves;
         }
+
+        private static int RecognizeMoveType(String move)
+        {
+
+        }
+
+        private static void PlacePiece(String move)
+        {
+
+        }
+
+        private static void MoveOnePiece(String move)
+        {
+
+        }
+
+        private static void MoveTwoPieces(String move)
+        {
+
+        }
     }
 }
