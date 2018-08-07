@@ -13,10 +13,7 @@ namespace Chess.Controllers
 
         public static void Run()
         {
-            SetMoveFilePath("");
-            List<String> moves = LoadMoveFile();
 
-            moves.ForEach(i => Console.WriteLine(i));
         }
 
         public static void SetMoveFilePath(string loadPath)
