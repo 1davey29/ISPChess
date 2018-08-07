@@ -121,8 +121,6 @@ namespace Chess.Controllers
                 default:
 
                     return 1;
-
-                    break;
             }
 
             Console.WriteLine($"Place {piece} on {square}");
