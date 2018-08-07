@@ -47,12 +47,54 @@ namespace Chess.Controllers
 
         private static int RecognizeMoveType(String move)
         {
+            switch (move.Length)
+            {
+                case 4:
 
+                    //Place a piece
+                    return 1;
+
+                case 5:
+
+                    //Move one piece
+                    return 2;
+
+                case 11:
+
+                    //Move two pieces
+                    return 3;
+
+                default:
+
+                    //Invalid move
+                    return 0;
+            }
         }
 
         private static void PlacePiece(String move)
         {
+            String pieceAcronym = move.Substring(0, 2);
+            String square = move.Substring(2);
+            String piece = "";
 
+            switch (pieceAcronym.Substring(0, 1))
+            {
+                case "K":
+
+                    break;
+
+                case "Q":
+
+                    break;
+
+                case "B":
+
+                    break;
+
+
+            }
+
+            Console.WriteLine($"Place {piece} on {square}");
         }
 
         private static void MoveOnePiece(String move)
