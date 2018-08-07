@@ -71,30 +71,63 @@ namespace Chess.Controllers
             }
         }
 
-        private static void PlacePiece(String move)
+        private static int PlacePiece(String move)
         {
             String pieceAcronym = move.Substring(0, 2);
             String square = move.Substring(2);
-            String piece = "";
+            String piece = (pieceAcronym.Substring(1, 2).Equals("l") ? "white " : (pieceAcronym.Substring(1, 2).Equals("d") ? "black " : "invalid"));
+
+            if (piece.Equals("invalid"))
+                return 1;
 
             switch (pieceAcronym.Substring(0, 1))
             {
                 case "K":
 
+                    piece += "king";
+
                     break;
 
                 case "Q":
+
+                    piece += "queen";
 
                     break;
 
                 case "B":
 
+                    piece += "bishop";
+
                     break;
 
+                case "N":
 
+                    piece += "knight";
+
+                    break;
+
+                case "R":
+
+                    piece += "rook";
+
+                    break;
+
+                case "P":
+
+                    piece += "pawn";
+
+                    break;
+
+                default:
+
+                    return 1;
+
+                    break;
             }
 
             Console.WriteLine($"Place {piece} on {square}");
+
+            return 0;
         }
 
         private static void MoveOnePiece(String move)
