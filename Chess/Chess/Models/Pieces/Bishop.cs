@@ -13,6 +13,9 @@ namespace Chess.Models.Pieces
             throw new NotImplementedException();
         }
 
-
+        public Bishop()
+        {
+            Symbol = 
+        }
     }
 }
