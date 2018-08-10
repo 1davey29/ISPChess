@@ -15,7 +15,7 @@ namespace Chess.Models.Pieces
 
         public Bishop()
         {
-            Symbol = 
+            symbol = 
         }
     }
 }

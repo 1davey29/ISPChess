@@ -11,7 +11,7 @@ namespace Chess.Models
         public Int16 XPosition { get; set; }
         public Int16 YPosition { get; set; }
 
-        private readonly Char symbol;
+        protected readonly Char symbol;
 
         public abstract void Move(String newPosition);
 
