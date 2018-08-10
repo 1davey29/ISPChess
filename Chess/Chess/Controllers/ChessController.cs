@@ -135,50 +135,57 @@ namespace Chess.Controllers
 
             Int16 x = Convert.ToInt16(Convert.ToChar(square.Substring(0, 1).ToUpper()) - 65);
 
-            switch (pieceAcronym.Substring(0, 1))
+            if (board.gameSpace[x, y] is EmptyPiece)
             {
-                case "K":
 
-                    board.gameSpace[x, y] = new King(color);
+                switch (pieceAcronym.Substring(0, 1))
+                {
+                    case "K":
 
-                    break;
+                        board.gameSpace[x, y] = new King(color);
 
-                case "Q":
+                        break;
 
-                    board.gameSpace[x, y] = new Queen(color);
+                    case "Q":
 
-                    break;
+                        board.gameSpace[x, y] = new Queen(color);
 
-                case "B":
+                        break;
 
-                    board.gameSpace[x, y] = new Bishop(color);
+                    case "B":
 
-                    break;
+                        board.gameSpace[x, y] = new Bishop(color);
 
-                case "N":
+                        break;
 
-                    board.gameSpace[x, y] = new Knight(color);
+                    case "N":
 
-                    break;
+                        board.gameSpace[x, y] = new Knight(color);
 
-                case "R":
+                        break;
 
-                    board.gameSpace[x, y] = new Rook(color);
+                    case "R":
 
-                    break;
+                        board.gameSpace[x, y] = new Rook(color);
 
-                case "P":
+                        break;
 
-                    board.gameSpace[x, y] = new Pawn(color);
+                    case "P":
 
-                    break;
+                        board.gameSpace[x, y] = new Pawn(color);
 
-                default:
+                        break;
 
-                    return 1;
+                    default:
+
+                        return 1;
+                }
+
+                return 0;
+            } else
+            {
+                Console.WriteLine("Invalid position, a piece already exists on that square!");
             }
-
-            return 0;
         }
 
         private static void MoveOnePiece(String move)
