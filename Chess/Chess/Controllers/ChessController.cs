@@ -122,7 +122,7 @@ namespace Chess.Controllers
             String pieceAcronym = move.Substring(0, 2);
             String color = (pieceAcronym.Substring(1).Equals("l") ? "white " : (pieceAcronym.Substring(1).Equals("d") ? "black " : "invalid"));
 
-            if (piece.Equals("invalid"))
+            if (color.Equals("invalid"))
                 return 1;
 
             String square = move.Substring(2);
