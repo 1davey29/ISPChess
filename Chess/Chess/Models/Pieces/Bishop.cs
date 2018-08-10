@@ -12,5 +12,7 @@ namespace Chess.Models.Pieces
         {
             throw new NotImplementedException();
         }
+
+
     }
 }

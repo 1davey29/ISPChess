@@ -17,7 +17,7 @@ namespace Chess.Models
             {
                 for (int y = 0; y < gameSpace.Length; y++)
                 {
-                    gameSpace[x, y] = new Piece();
+                    gameSpace[x, y] = new EmptyPiece();
                 }
             }
         }
