@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Chess.Models.Piece;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,16 +9,16 @@ namespace Chess.Models
 {
     public class Board
     {
-        public char[,] gameSpace { get; set; }
+        public Piece[,] gameSpace { get; set; }
 
         public Board()
         {
-            gameSpace = new char[8, 8];
+            gameSpace = new Piece[8, 8];
             for (int x = 0; x < gameSpace.Length; x++)
             {
                 for (int y = 0; y < gameSpace.Length; y++)
                 {
-                    gameSpace[x, y] = '-';
+                    gameSpace[x, y] = new Piece();
                 }
             }
         }
