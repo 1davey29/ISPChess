@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Chess.Models.Pieces
 {
-    class Pawn
+    public class Pawn : Piece
     {
+        public override void Move(string newPosition)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
