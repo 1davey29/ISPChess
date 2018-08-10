@@ -25,7 +25,18 @@ namespace Chess.Models
 
         public void DisplayBoard()
         {
+            int iterationCounter = 0;
 
+            foreach (Piece p in gameSpace)
+            {
+                iterationCounter++;
+                Console.Write($"{p.GetSymbol()} ");
+
+                if (iterationCounter%8==0)
+                {
+                    Console.WriteLine();
+                }
+            }
         }
     }
 }

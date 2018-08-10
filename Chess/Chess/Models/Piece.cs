@@ -15,6 +15,11 @@ namespace Chess.Models
 
         public abstract void Move(String newPosition);
 
+        public Char GetSymbol()
+        {
+            return symbol;
+        }
+
         public Piece(Char symbol)
         {
             this.symbol = symbol;
