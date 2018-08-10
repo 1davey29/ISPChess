@@ -12,5 +12,9 @@ namespace Chess.Models.Pieces
         {
             throw new NotImplementedException();
         }
+
+        public King(String color) : base(color.Equals("White") ? 'k' : 'K')
+        {
+        }
     }
 }

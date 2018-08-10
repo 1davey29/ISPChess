@@ -13,9 +13,8 @@ namespace Chess.Models.Pieces
             throw new NotImplementedException();
         }
 
-        public Bishop()
+        public Bishop(String color) : base(color.Equals("White") ? 'b' : 'B')
         {
-            symbol = 
         }
     }
 }

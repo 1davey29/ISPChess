@@ -12,5 +12,9 @@ namespace Chess.Models.Pieces
         {
             throw new NotImplementedException();
         }
+
+        public Rook(String color) : base(color.Equals("White") ? 'r' : 'R')
+        {
+        }
     }
 }

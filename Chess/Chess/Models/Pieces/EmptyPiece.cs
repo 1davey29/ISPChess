@@ -10,7 +10,10 @@ namespace Chess.Models.Pieces
     {
         public override void Move(string newPosition)
         {
-            throw new NotImplementedException();
+        }
+
+        public EmptyPiece() : base('-')
+        {
         }
     }
 }

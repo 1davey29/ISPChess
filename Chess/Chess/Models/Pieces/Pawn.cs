@@ -12,5 +12,9 @@ namespace Chess.Models.Pieces
         {
             throw new NotImplementedException();
         }
+
+        public Pawn(String color) : base(color.Equals("White") ? 'p' : 'P')
+        {
+        }
     }
 }

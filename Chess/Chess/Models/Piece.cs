@@ -15,9 +15,9 @@ namespace Chess.Models
 
         public abstract void Move(String newPosition);
 
-        public Piece()
+        public Piece(Char symbol)
         {
-            symbol = '-';
+            this.symbol = symbol;
         }
     }
 }
