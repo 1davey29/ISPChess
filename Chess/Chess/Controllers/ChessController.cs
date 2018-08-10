@@ -129,9 +129,7 @@ namespace Chess.Controllers
             Int16 y;
 
             if (!Int16.TryParse(square.Substring(1), out y))
-            {
-                throw new FormatException("Error: Invalid square format");
-            }
+                return 1;
 
             Int16 x = Convert.ToInt16(Convert.ToChar(square.Substring(0, 1).ToUpper()) - 65);
 
@@ -182,9 +180,13 @@ namespace Chess.Controllers
                 }
 
                 return 0;
-            } else
+
+            }
+            else
             {
                 Console.WriteLine("Invalid position, a piece already exists on that square!");
+
+                return 2;
             }
         }
 
