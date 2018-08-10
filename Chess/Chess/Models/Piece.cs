@@ -11,7 +11,13 @@ namespace Chess.Models
         public Int16 XPosition { get; set; }
         public Int16 YPosition { get; set; }
 
+        private readonly Char Symbol;
 
         public abstract void Move(String newPosition);
+
+        public Piece()
+        {
+            Symbol = '-';
+        }
     }
 }
