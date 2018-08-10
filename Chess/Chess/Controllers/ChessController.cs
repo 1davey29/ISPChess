@@ -5,10 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Chess.Models;
+using Chess.Models.Pieces;
+
 namespace Chess.Controllers
 {
     class ChessController
     {
+        private static Board board = new Board();
         private static string filePath;
 
         public static void Run()
@@ -116,47 +120,56 @@ namespace Chess.Controllers
         private static int PlacePiece(String move)
         {
             String pieceAcronym = move.Substring(0, 2);
-            String square = move.Substring(2);
-            String piece = (pieceAcronym.Substring(1).Equals("l") ? "white " : (pieceAcronym.Substring(1).Equals("d") ? "black " : "invalid"));
+            String color = (pieceAcronym.Substring(1).Equals("l") ? "white " : (pieceAcronym.Substring(1).Equals("d") ? "black " : "invalid"));
 
             if (piece.Equals("invalid"))
                 return 1;
+
+            String square = move.Substring(2);
+            Int16 y;
+
+            if (!Int16.TryParse(square.Substring(1), out y))
+            {
+
+            }
+
+            Int16 x = Convert.ToInt16(Convert.ToChar(square.Substring(0, 1).ToUpper()) - 65);
 
             switch (pieceAcronym.Substring(0, 1))
             {
                 case "K":
 
-                    piece += "king";
+                    board.gameSpace[x, y] = new King(color);
 
                     break;
 
                 case "Q":
 
-                    piece += "queen";
+                    board.gameSpace[x, y] = new Queen(color);
 
                     break;
 
                 case "B":
 
-                    piece += "bishop";
+                    board.gameSpace[x, y] = new Bishop(color);
 
                     break;
 
                 case "N":
 
-                    piece += "knight";
+                    board.gameSpace[x, y] = new Knight(color);
 
                     break;
 
                 case "R":
 
-                    piece += "rook";
+                    board.gameSpace[x, y] = new Rook(color);
 
                     break;
 
                 case "P":
 
-                    piece += "pawn";
+                    board.gameSpace[x, y] = new Pawn(color);
 
                     break;
 
@@ -164,8 +177,6 @@ namespace Chess.Controllers
 
                     return 1;
             }
-
-            Console.WriteLine($"Place {piece} on {square}");
 
             return 0;
         }
