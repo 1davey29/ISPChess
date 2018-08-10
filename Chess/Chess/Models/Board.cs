@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Chess.Models.Pieces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,11 @@ namespace Chess.Models
                     gameSpace[x, y] = new EmptyPiece();
                 }
             }
+        }
+
+        public void DisplayBoard()
+        {
+
         }
     }
 }
