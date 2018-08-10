@@ -8,8 +8,9 @@ namespace Chess.Models
 {
     public abstract class Piece
     {
-        private Int16 xPosition;
-        private Int16 yPosition;
+        public Int16 XPosition { get; set; }
+        public Int16 YPosition { get; set; }
+
 
         public abstract void Move(String newPosition);
     }
