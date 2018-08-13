@@ -190,7 +190,7 @@ namespace Chess.Controllers
             }
         }
 
-        private static int MoveOnePiece(String move)
+        private static int MovePiece(String move)
         {
             String square1 = move.Substring(0, 2);
             Int16 y1;
