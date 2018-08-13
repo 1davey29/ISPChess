@@ -50,7 +50,7 @@ namespace Chess.Controllers
 
                     case 0:
 
-                        Console.WriteLine("Invalid Move");
+                        Console.WriteLine($"Move {iter} is an invalid move");
 
                         break;
 
@@ -60,15 +60,10 @@ namespace Chess.Controllers
 
                         break;
                 }
-
-                Console.WriteLine($"Move {iter}:\n");
-
-                board.DisplayBoard();
-
-                Console.WriteLine();
-
                 iter++;
             }
+
+            board.DisplayBoard();
         }
 
         public static void SetMoveFilePath(string loadPath)
