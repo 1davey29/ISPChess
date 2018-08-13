@@ -190,11 +190,28 @@ namespace Chess.Controllers
             }
         }
 
-        private static void MoveOnePiece(String move)
+        private static int MoveOnePiece(String move)
         {
-            String[] moveSteps = move.Split(' ');
+            String square1 = move.Substring(0, 2);
+            Int16 y1;
 
-            Console.WriteLine($"Piece moved from {moveSteps[0]} to {moveSteps[1]}");
+            if (!Int16.TryParse(square1.Substring(1), out y1))
+                return 1;
+
+            Int16 x1 = Convert.ToInt16(Convert.ToChar(square1.Substring(0, 1).ToUpper()) - 65);
+
+            String square2 = move.Substring(3);
+            Int16 y2;
+
+            if (!Int16.TryParse(square2.Substring(1), out y2))
+                return 1;
+
+            Int16 x2 = Convert.ToInt16(Convert.ToChar(square2.Substring(0, 1).ToUpper()) - 65);
+
+            board.gameSpace[x2, y2] = board.gameSpace[x1, y1];
+            board.gameSpace[x1, y1] = new EmptyPiece();
+
+            return 0;
         }
 
         private static void MoveTwoPieces(String move)
