@@ -14,9 +14,9 @@ namespace Chess.Models
         public Board()
         {
             gameSpace = new Piece[8, 8];
-            for (int x = 0; x < gameSpace.Length; x++)
+            for (int x = 0; x < 8; x++)
             {
-                for (int y = 0; y < gameSpace.Length; y++)
+                for (int y = 0; y < 8; y++)
                 {
                     gameSpace[x, y] = new EmptyPiece();
                 }
