@@ -37,7 +37,7 @@ namespace Chess.Controllers
 
                     case 2:
 
-                        MoveOnePiece(move);
+                        MovePiece(move);
 
                         break;
 
@@ -214,13 +214,15 @@ namespace Chess.Controllers
             return 0;
         }
 
-        private static void MoveTwoPieces(String move)
+        private static int MoveTwoPieces(String move)
         {
             String[] moves = move.Split(' ');
-            String[] move1Steps = { moves[0], moves[1] };
-            String[] move2Steps = { moves[2], moves[3] };
 
-            Console.WriteLine($"Piece moved from {move1Steps[0]} to {move1Steps[1]}, and piece moved from {move2Steps[0]} to {move2Steps[1]}");
+            MovePiece(moves[0]);
+
+            MovePiece(moves[1]);
+
+            return 0;
         }
     }
 }
