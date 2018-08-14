@@ -10,7 +10,7 @@ using Chess.Models.Pieces;
 
 namespace Chess.Controllers
 {
-    class ChessController
+    public static class ChessController
     {
         private static Board board = new Board();
         private static string filePath;
