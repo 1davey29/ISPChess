@@ -8,7 +8,7 @@ namespace Chess.Models.Pieces
 {
     public class Rook : Piece
     {
-        public override void Move(string newPosition)
+        public override int Move(string newPosition)
         {
             throw new NotImplementedException();
         }
