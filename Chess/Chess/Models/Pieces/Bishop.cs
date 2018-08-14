@@ -10,17 +10,24 @@ namespace Chess.Models.Pieces
     {
         public override int Move(string newPosition)
         {
-            Int32 x;
-            if (!Int32.TryParse(newPosition.Substring(1), out x))
+            int[] positionXY;
+
+            positionXY = Chess.Controllers.ChessController.ConvertToXY(newPosition);
+
+            int distanceX = Math.Abs(XPosition - positionXY[0]);
+            int distanceY = Math.Abs(YPosition - positionXY[1]);
+
+            //Check if within board next
+
+
+
+
+            if (distanceX == distanceY)
             {
-                return 1;
+                
             }
 
-            x = 8 - x;
 
-            Int32 y = (Convert.ToInt32(Convert.ToChar(newPosition.Substring(0, 1).ToUpper()) - 65));
-
-            
 
             return 0;
         }
