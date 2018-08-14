@@ -8,11 +8,12 @@ namespace Chess.Models.Pieces
 {
     public class EmptyPiece : Piece
     {
-        public override void Move(string newPosition)
+        public override int Move(string newPosition)
         {
+            return 0;
         }
 
-        public EmptyPiece() : base('-')
+        public EmptyPiece(int xPosition, int yPosition) : base('-', xPosition, yPosition)
         {
         }
     }
