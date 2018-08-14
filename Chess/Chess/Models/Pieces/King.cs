@@ -37,7 +37,7 @@ namespace Chess.Models.Pieces
             return 0;
         }
 
-        public King(String color) : base(color.Equals("White") ? 'k' : 'K')
+        public King(String color, int x, int y) : base(color.Equals("White") ? 'k' : 'K', x, y)
         {
         }
     }
