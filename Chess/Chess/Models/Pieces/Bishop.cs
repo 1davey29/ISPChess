@@ -12,15 +12,15 @@ namespace Chess.Models.Pieces
         {
             int[] positionXY;
 
-            positionXY = Chess.Controllers.ChessController.ConvertToXY(newPosition);
+            positionXY = Controllers.ChessController.ConvertToXY(newPosition);
 
             int distanceX = Math.Abs(XPosition - positionXY[0]);
             int distanceY = Math.Abs(YPosition - positionXY[1]);
 
-            //Check if within board next
-
-
-
+            if ((positionXY[0] < 0 || positionXY[0] > 7) || (positionXY[1] < 0 || positionXY[1] > 7))
+            {
+                throw new ArgumentOutOfRangeException("The position specified is out of bounds!");
+            }
 
             if (distanceX == distanceY)
             {
