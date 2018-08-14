@@ -37,7 +37,7 @@ namespace Chess.Models.Pieces
             return 0;
         }
 
-        public Bishop(String color) : base(color.Equals("White") ? 'b' : 'B')
+        public Bishop(String color, int x, int y) : base(color.Equals("White") ? 'b' : 'B', x, y)
         {
         }
     }
