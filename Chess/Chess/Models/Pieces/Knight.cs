@@ -37,7 +37,7 @@ namespace Chess.Models.Pieces
             return 0;
         }
 
-        public Knight(String color) : base(color.Equals("White") ? 'n' : 'N')
+        public Knight(String color, int x, int y) : base(color.Equals("White") ? 'n' : 'N', x, y)
         {
         }
     }
