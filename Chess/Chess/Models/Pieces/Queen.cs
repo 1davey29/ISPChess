@@ -1,9 +1,10 @@
-﻿using Chess.Controllers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using Chess.Controllers;
 
 namespace Chess.Models.Pieces
 {
@@ -23,7 +24,7 @@ namespace Chess.Models.Pieces
                 throw new ArgumentOutOfRangeException("The position specified is out of bounds!");
             }
 
-            if ((distanceX != distanceY)||()||())
+            if ((distanceX != 0 && distanceY != 0) && (distanceX != distanceY))
             {
                 throw new ArgumentException("Invalid move for the specified piece");
             }
@@ -37,7 +38,7 @@ namespace Chess.Models.Pieces
             return 0;
         }
 
-        public Queen(String color) : base(color.Equals("White") ? 'q' : 'Q')
+        public Queen(String color, int x, int y) : base(color.Equals("White") ? 'q' : 'Q', x, y)
         {
         }
     }
