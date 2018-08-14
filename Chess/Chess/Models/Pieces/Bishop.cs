@@ -22,12 +22,13 @@ namespace Chess.Models.Pieces
                 throw new ArgumentOutOfRangeException("The position specified is out of bounds!");
             }
 
-            if (distanceX == distanceY)
+            if (distanceX != distanceY)
             {
-                
+                throw new ArgumentException("Invalid move for the specified piece");
             }
 
-
+            XPosition = positionXY[0];
+            YPosition = positionXY[1];
 
             return 0;
         }
