@@ -23,7 +23,7 @@ namespace Chess.Models
                     {
                         for (int y = 0; y < 8; y++)
                         {
-                            gameSpace[x, y] = new EmptyPiece();
+                            gameSpace[x, y] = new EmptyPiece(x, y);
                         }
                     }
 
@@ -89,7 +89,7 @@ namespace Chess.Models
                         {
                             for (int y = 0; y < 8; y++)
                             {
-                                gameSpace[x, y] = new EmptyPiece();
+                                gameSpace[x, y] = new EmptyPiece(x, y);
                             }
                         }
                     }
@@ -170,7 +170,7 @@ namespace Chess.Models
                         {
                             for (int y = 0; y < 8; y++)
                             {
-                                gameSpace[x, y] = new EmptyPiece();
+                                gameSpace[x, y] = new EmptyPiece(x, y);
                             }
                         }
                     }
