@@ -232,5 +232,19 @@ namespace Chess.Controllers
 
             return 0;
         }
+
+        public static int[] ConvertToXY(string position)
+        {
+            Int32 x;
+
+            Int32.TryParse(position.Substring(1), out x);
+
+            x = 8 - x;
+
+            Int32 y = (Convert.ToInt32(Convert.ToChar(position.Substring(0, 1).ToUpper()) - 65));
+
+            int[] positionXY = { x, y };
+            return positionXY;
+        }
     }
 }
