@@ -12,8 +12,9 @@ namespace Chess.Controllers
 {
     public static class ChessController
     {
-        private static Board board = new Board();
         private static string filePath;
+
+        public static Board Board { get; set; } = new Board();
 
         public static void Run()
         {
@@ -63,7 +64,7 @@ namespace Chess.Controllers
                 iter++;
             }
 
-            board.DisplayBoard();
+            Board.DisplayBoard();
         }
 
         public static void SetMoveFilePath(string loadPath)
@@ -139,44 +140,44 @@ namespace Chess.Controllers
 
             Int32 y = (Convert.ToInt32(Convert.ToChar(square.Substring(0, 1).ToUpper()) - 65));
 
-            if (board.gameSpace[x, y] is EmptyPiece)
+            if (Board.gameSpace[x, y] is EmptyPiece)
             {
 
                 switch (pieceAcronym.Substring(0, 1))
                 {
                     case "K":
 
-                        board.gameSpace[x, y] = new King(color);
+                        Board.gameSpace[x, y] = new King(color);
 
                         break;
 
                     case "Q":
 
-                        board.gameSpace[x, y] = new Queen(color);
+                        Board.gameSpace[x, y] = new Queen(color);
 
                         break;
 
                     case "B":
 
-                        board.gameSpace[x, y] = new Bishop(color);
+                        Board.gameSpace[x, y] = new Bishop(color);
 
                         break;
 
                     case "N":
 
-                        board.gameSpace[x, y] = new Knight(color);
+                        Board.gameSpace[x, y] = new Knight(color);
 
                         break;
 
                     case "R":
 
-                        board.gameSpace[x, y] = new Rook(color);
+                        Board.gameSpace[x, y] = new Rook(color);
 
                         break;
 
                     case "P":
 
-                        board.gameSpace[x, y] = new Pawn(color);
+                        Board.gameSpace[x, y] = new Pawn(color);
 
                         break;
 
@@ -194,43 +195,6 @@ namespace Chess.Controllers
 
                 return 2;
             }
-        }
-
-        private static int MovePiece(String move)
-        {
-            String square1 = move.Substring(0, 2);
-            int x1;
-
-            if (!int.TryParse(square1.Substring(1), out x1))
-                return 1;
-
-            x1 = 8 - x1;
-
-            int y1 = Convert.ToInt32(Convert.ToChar(square1.Substring(0, 1).ToUpper()) - 65);
-
-            String square2 = move.Substring(3);
-            int x2;
-
-            if (!int.TryParse(square2.Substring(1), out x2))
-                return 1;
-
-            x2 = 8 - x2;
-
-            int y2 = Convert.ToInt32(Convert.ToChar(square2.Substring(0, 1).ToUpper()) - 65);
-
-            board.gameSpace[x2, y2] = board.gameSpace[x1, y1];
-            board.gameSpace[x1, y1] = new EmptyPiece();
-
-            return 0;
-        }
-
-        private static int MoveTwoPieces(String move)
-        {
-            MovePiece(move.Substring(0, 5));
-
-            MovePiece(move.Substring(6));
-
-            return 0;
         }
 
         public static int[] ConvertToXY(string position)
