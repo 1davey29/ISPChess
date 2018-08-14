@@ -20,9 +20,11 @@ namespace Chess.Models
             return symbol;
         }
 
-        public Piece(Char symbol)
+        public Piece(Char symbol, Int16 xPosition, Int16 yPosition)
         {
             this.symbol = symbol;
+            XPosition = xPosition;
+            YPosition = yPosition;
         }
     }
 }
