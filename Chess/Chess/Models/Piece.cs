@@ -8,8 +8,8 @@ namespace Chess.Models
 {
     public abstract class Piece
     {
-        public Int16 XPosition { get; set; }
-        public Int16 YPosition { get; set; }
+        public int XPosition { get; set; }
+        public int YPosition { get; set; }
 
         protected readonly Char symbol;
 
