@@ -51,16 +51,27 @@ namespace Chess.Models.Pieces
             return 0;
         }
 
-        private int ValidRookMove(int absDist, int changedPos, bool isX)
+        protected static int ValidRookMove(int absDist, int changedPos, bool isX, Object obj, bool isQueen)
         {
+            Piece piece;
+
+            if (isQueen)
+            {
+                piece = obj as Queen;
+            }
+            else
+            {
+                piece = obj as Rook;
+            }
+
             for (int i = 0; i < absDist; i++)
             {
                 if (isX)
                 {
-                    if (changedPos - XPosition > 0)
+                    if (changedPos - piece.XPosition > 0)
                     {
-                        int type = (ChessController.Board.gameSpace[changedPos - i, YPosition].GetType() == typeof(EmptyPiece) ? 0 :
-                            (ChessController.Board.gameSpace[changedPos - i, YPosition].GetType() == typeof(King) ? 1 : 2));
+                        int type = (ChessController.Board.gameSpace[changedPos - i, piece.YPosition].GetType() == typeof(EmptyPiece) ? 0 :
+                            (ChessController.Board.gameSpace[changedPos - i, piece.YPosition].GetType() == typeof(King) ? 1 : 2));
 
                         switch (type)
                         {
@@ -70,7 +81,7 @@ namespace Chess.Models.Pieces
 
                             case 1:
 
-                                if (Char.IsUpper(ChessController.Board.gameSpace[changedPos - i, YPosition].GetSymbol()) ^ Char.IsUpper(this.symbol))
+                                if (Char.IsUpper(ChessController.Board.gameSpace[changedPos - i, piece.YPosition].GetSymbol()) ^ Char.IsUpper(piece.GetSymbol()))
                                 {
                                     throw new InvalidOperationException("Error: Cannot take Enemy King, Enemy King in check");
                                 }
@@ -81,7 +92,7 @@ namespace Chess.Models.Pieces
 
                             case 2:
 
-                                if (Char.IsUpper(ChessController.Board.gameSpace[changedPos - i, YPosition].GetSymbol()) ^ Char.IsUpper(this.symbol))
+                                if (Char.IsUpper(ChessController.Board.gameSpace[changedPos - i, piece.YPosition].GetSymbol()) ^ Char.IsUpper(piece.GetSymbol()))
                                 {
                                     if (i == 0)
                                     {
@@ -104,8 +115,8 @@ namespace Chess.Models.Pieces
                     }
                     else
                     {
-                        int type = (ChessController.Board.gameSpace[changedPos + i, YPosition].GetType() == typeof(EmptyPiece) ? 0 :
-                            (ChessController.Board.gameSpace[changedPos + i, YPosition].GetType() == typeof(King) ? 1 : 2));
+                        int type = (ChessController.Board.gameSpace[changedPos + i, piece.YPosition].GetType() == typeof(EmptyPiece) ? 0 :
+                            (ChessController.Board.gameSpace[changedPos + i, piece.YPosition].GetType() == typeof(King) ? 1 : 2));
 
                         switch (type)
                         {
@@ -115,7 +126,7 @@ namespace Chess.Models.Pieces
 
                             case 1:
 
-                                if (Char.IsUpper(ChessController.Board.gameSpace[changedPos + i, YPosition].GetSymbol()) ^ Char.IsUpper(this.symbol))
+                                if (Char.IsUpper(ChessController.Board.gameSpace[changedPos + i, piece.YPosition].GetSymbol()) ^ Char.IsUpper(piece.GetSymbol()))
                                 {
                                     throw new InvalidOperationException("Error: Cannot take Enemy King, Enemy King in check");
                                 }
@@ -126,7 +137,7 @@ namespace Chess.Models.Pieces
 
                             case 2:
 
-                                if (Char.IsUpper(ChessController.Board.gameSpace[changedPos + i, YPosition].GetSymbol()) ^ Char.IsUpper(this.symbol))
+                                if (Char.IsUpper(ChessController.Board.gameSpace[changedPos + i, piece.YPosition].GetSymbol()) ^ Char.IsUpper(piece.GetSymbol()))
                                 {
                                     if (i == 0)
                                     {
@@ -150,10 +161,10 @@ namespace Chess.Models.Pieces
                 }
                 else
                 {
-                    if (changedPos - YPosition > 0)
+                    if (changedPos - piece.YPosition > 0)
                     {
-                        int type = (ChessController.Board.gameSpace[XPosition, changedPos - i].GetType() == typeof(EmptyPiece) ? 0 :
-                            (ChessController.Board.gameSpace[XPosition, changedPos - i].GetType() == typeof(King) ? 1 : 2));
+                        int type = (ChessController.Board.gameSpace[piece.XPosition, changedPos - i].GetType() == typeof(EmptyPiece) ? 0 :
+                            (ChessController.Board.gameSpace[piece.XPosition, changedPos - i].GetType() == typeof(King) ? 1 : 2));
 
                         switch (type)
                         {
@@ -163,7 +174,7 @@ namespace Chess.Models.Pieces
 
                             case 1:
 
-                                if (Char.IsUpper(ChessController.Board.gameSpace[XPosition, changedPos - i].GetSymbol()) ^ Char.IsUpper(this.symbol))
+                                if (Char.IsUpper(ChessController.Board.gameSpace[piece.XPosition, changedPos - i].GetSymbol()) ^ Char.IsUpper(piece.GetSymbol()))
                                 {
                                     throw new InvalidOperationException("Error: Cannot take Enemy King, Enemy King in check");
                                 }
@@ -174,7 +185,7 @@ namespace Chess.Models.Pieces
 
                             case 2:
 
-                                if (Char.IsUpper(ChessController.Board.gameSpace[XPosition, changedPos - i].GetSymbol()) ^ Char.IsUpper(this.symbol))
+                                if (Char.IsUpper(ChessController.Board.gameSpace[piece.XPosition, changedPos - i].GetSymbol()) ^ Char.IsUpper(piece.GetSymbol()))
                                 {
                                     if (i == 0)
                                     {
@@ -197,8 +208,8 @@ namespace Chess.Models.Pieces
                     }
                     else
                     {
-                        int type = (ChessController.Board.gameSpace[XPosition, changedPos + i].GetType() == typeof(EmptyPiece) ? 0 :
-                            (ChessController.Board.gameSpace[XPosition, changedPos + i].GetType() == typeof(King) ? 1 : 2));
+                        int type = (ChessController.Board.gameSpace[piece.XPosition, changedPos + i].GetType() == typeof(EmptyPiece) ? 0 :
+                            (ChessController.Board.gameSpace[piece.XPosition, changedPos + i].GetType() == typeof(King) ? 1 : 2));
 
                         switch (type)
                         {
@@ -208,7 +219,7 @@ namespace Chess.Models.Pieces
 
                             case 1:
 
-                                if (Char.IsUpper(ChessController.Board.gameSpace[XPosition, changedPos + i].GetSymbol()) ^ Char.IsUpper(this.symbol))
+                                if (Char.IsUpper(ChessController.Board.gameSpace[piece.XPosition, changedPos + i].GetSymbol()) ^ Char.IsUpper(piece.GetSymbol()))
                                 {
                                     throw new InvalidOperationException("Error: Cannot take Enemy King, Enemy King in check");
                                 }
@@ -219,7 +230,7 @@ namespace Chess.Models.Pieces
 
                             case 2:
 
-                                if (Char.IsUpper(ChessController.Board.gameSpace[XPosition, changedPos + i].GetSymbol()) ^ Char.IsUpper(this.symbol))
+                                if (Char.IsUpper(ChessController.Board.gameSpace[piece.XPosition, changedPos + i].GetSymbol()) ^ Char.IsUpper(piece.GetSymbol()))
                                 {
                                     if (i == 0)
                                     {
