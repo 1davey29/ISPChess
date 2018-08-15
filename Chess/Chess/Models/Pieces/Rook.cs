@@ -31,11 +31,11 @@ namespace Chess.Models.Pieces
 
             if (distanceX == 0 && distanceY != 0)
             {
-                ValidRookMove(distanceY, positionXY[1], false);
+                ValidRookMove(distanceY, positionXY[1], false, this, false);
             }
             else if (distanceY == 0 && distanceX != 0)
             {
-                ValidRookMove(distanceX, positionXY[0], true);
+                ValidRookMove(distanceX, positionXY[0], true, this, false);
             }
             else
             {
