@@ -28,11 +28,69 @@ namespace Chess.Models.Pieces
                 throw new ArgumentException("Invalid move for the specified piece");
             }
 
-            ChessController.Board.gameSpace[positionXY[0], positionXY[1]] = this;
-            ChessController.Board.gameSpace[XPosition, YPosition] = new EmptyPiece(XPosition, YPosition);
+            switch (PieceInWay(this, positionXY, distanceX, distanceY, false))
+            {
+                case 0:
+                    ChessController.Board.gameSpace[positionXY[0], positionXY[1]] = this;
+                    ChessController.Board.gameSpace[XPosition, YPosition] = new EmptyPiece(XPosition, YPosition);
 
-            XPosition = positionXY[0];
-            YPosition = positionXY[1];
+                    XPosition = positionXY[0];
+                    YPosition = positionXY[1];
+
+                    break;
+            } 
+
+            
+            return 0;
+        }
+
+        protected static int PieceInWay(Object obj, int[] positionXY, int distanceX, int distanceY, bool isQueen)
+        {
+            Piece piece;
+
+            if (isQueen)
+            {
+                piece = obj as Queen;
+            } else
+            {
+                piece = obj as Bishop;
+            }
+
+            for (int x = (piece.XPosition - positionXY[0] > 0) ? positionXY[0] : distanceX; (piece.XPosition - positionXY[0] > 0) ? x <= distanceX : x >= positionXY[0];)
+            {
+                for (int y = (piece.YPosition - positionXY[1] > 0) ? positionXY[1] : distanceY; (piece.YPosition - positionXY[1] > 0) ? y <= distanceY : y >= positionXY[1];)
+                {
+                    if (Math.Abs(x) == Math.Abs(y))
+                    {
+
+                        if (ChessController.Board.gameSpace[x, y].GetType() != typeof(EmptyPiece))
+                        {
+                            if (((piece.XPosition - positionXY[0] > 0) ? x == positionXY[0] : x == distanceX) && ((piece.YPosition - positionXY[1] > 0) ? y == positionXY[1] : x == distanceY))
+                            {
+                                if (!(Char.IsLower(piece.GetSymbol()) ? Char.IsUpper(ChessController.Board.gameSpace[x, y].GetSymbol()) : Char.IsLower(ChessController.Board.gameSpace[x, y].GetSymbol())))
+                                {
+                                    throw new Exception("You cannot take your own piece");
+                                }
+                            }
+                            else
+                            {
+                                throw new Exception("Cannot move through other pieces");
+                            }
+
+                        }
+                    }
+
+                    if (piece.XPosition - positionXY[0] > 0)
+                        x++;
+                    else
+                        x--;
+
+                    if (piece.YPosition - positionXY[1] > 0)
+                        y++;
+                    else
+                        y--;
+                }
+            }
 
             return 0;
         }
