@@ -147,37 +147,37 @@ namespace Chess.Controllers
                 {
                     case "K":
 
-                        Board.gameSpace[x, y] = new King(color);
+                        Board.gameSpace[x, y] = new King(color, x, y);
 
                         break;
 
                     case "Q":
 
-                        Board.gameSpace[x, y] = new Queen(color);
+                        Board.gameSpace[x, y] = new Queen(color, x, y);
 
                         break;
 
                     case "B":
 
-                        Board.gameSpace[x, y] = new Bishop(color);
+                        Board.gameSpace[x, y] = new Bishop(color, x, y);
 
                         break;
 
                     case "N":
 
-                        Board.gameSpace[x, y] = new Knight(color);
+                        Board.gameSpace[x, y] = new Knight(color, x, y);
 
                         break;
 
                     case "R":
 
-                        Board.gameSpace[x, y] = new Rook(color);
+                        Board.gameSpace[x, y] = new Rook(color, x, y);
 
                         break;
 
                     case "P":
 
-                        Board.gameSpace[x, y] = new Pawn(color);
+                        Board.gameSpace[x, y] = new Pawn(color, x, y);
 
                         break;
 

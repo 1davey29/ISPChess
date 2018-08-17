@@ -80,7 +80,7 @@ namespace Chess.Models.Pieces
             return 0;
         }
 
-        public Pawn(String color) : base(color.Equals("White") ? 'p' : 'P')
+        public Pawn(String color, int x, int y) : base(color.Equals("White") ? 'p' : 'P', x, y)
         {
         }
     }
