@@ -28,11 +28,24 @@ namespace Chess.Models.Pieces
                 throw new ArgumentException("Invalid move for the specified piece");
             }
 
-            ChessController.Board.gameSpace[positionXY[0], positionXY[1]] = this;
-            ChessController.Board.gameSpace[XPosition, YPosition] = new EmptyPiece(XPosition, YPosition);
 
-            XPosition = positionXY[0];
-            YPosition = positionXY[1];
+            if (ChessController.Board.gameSpace[positionXY[0], positionXY[1]].GetType() != typeof(EmptyPiece))
+            {
+                if (!(Char.IsLower(this.GetSymbol()) ?
+                    Char.IsUpper(ChessController.Board.gameSpace[positionXY[0], positionXY[1]].GetSymbol()) :
+                    Char.IsLower(ChessController.Board.gameSpace[positionXY[0], positionXY[1]].GetSymbol())))
+                {
+                    throw new Exception("You cannot take your own piece");
+                }
+
+                ChessController.Board.gameSpace[positionXY[0], positionXY[1]] = this;
+                ChessController.Board.gameSpace[XPosition, YPosition] = new EmptyPiece(XPosition, YPosition);
+
+                XPosition = positionXY[0];
+                YPosition = positionXY[1];
+
+            }
+
 
             return 0;
         }

@@ -65,7 +65,7 @@ namespace Chess.Models.Pieces
 
                         if (ChessController.Board.gameSpace[x, y].GetType() != typeof(EmptyPiece))
                         {
-                            if (((piece.XPosition - positionXY[0] > 0) ? x == positionXY[0] : x == distanceX) && ((piece.YPosition - positionXY[1] > 0) ? y == positionXY[1] : x == distanceY))
+                            if (((piece.XPosition - positionXY[0] > 0) ? x == positionXY[0] : x == distanceX) && ((piece.YPosition - positionXY[1] > 0) ? y == positionXY[1] : y == distanceY))
                             {
                                 if (!(Char.IsLower(piece.GetSymbol()) ? Char.IsUpper(ChessController.Board.gameSpace[x, y].GetSymbol()) : Char.IsLower(ChessController.Board.gameSpace[x, y].GetSymbol())))
                                 {

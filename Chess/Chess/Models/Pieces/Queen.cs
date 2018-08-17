@@ -39,11 +39,16 @@ namespace Chess.Models.Pieces
                     (distanceX == 0) ? positionXY[1] : positionXY[0], (distanceX != 0), this, true);
             }
 
-            ChessController.Board.gameSpace[positionXY[0], positionXY[1]] = this;
-            ChessController.Board.gameSpace[XPosition, YPosition] = new EmptyPiece(XPosition, YPosition);
+            switch (validationReturn)
+            {
+                case 0:
+                    ChessController.Board.gameSpace[positionXY[0], positionXY[1]] = this;
+                    ChessController.Board.gameSpace[XPosition, YPosition] = new EmptyPiece(XPosition, YPosition);
 
-            XPosition = positionXY[0];
-            YPosition = positionXY[1];
+                    XPosition = positionXY[0];
+                    YPosition = positionXY[1];
+                    break;
+            }
 
             return 0;
         }
