@@ -37,11 +37,7 @@ namespace Chess.Models.Pieces
                     throw new Exception("You cannot take your own piece");
                 }
 
-                ChessController.Board.gameSpace[positionXY[0], positionXY[1]] = this;
-                ChessController.Board.gameSpace[XPosition, YPosition] = new EmptyPiece(XPosition, YPosition);
-
-                XPosition = positionXY[0];
-                YPosition = positionXY[1];
+                UpdateBoard(positionXY);
 
             }
 

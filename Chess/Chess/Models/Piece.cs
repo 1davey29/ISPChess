@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Chess.Controllers;
+using Chess.Models.Pieces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +20,15 @@ namespace Chess.Models
         public Char GetSymbol()
         {
             return symbol;
+        }
+
+        public void UpdateBoard(int[] positionXY)
+        {
+            ChessController.Board.gameSpace[positionXY[0], positionXY[1]] = this;
+            ChessController.Board.gameSpace[XPosition, YPosition] = new EmptyPiece(XPosition, YPosition);
+
+            XPosition = positionXY[0];
+            YPosition = positionXY[1];
         }
 
         public Piece(Char symbol, int xPosition, int yPosition)
