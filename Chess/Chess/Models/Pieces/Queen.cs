@@ -29,6 +29,16 @@ namespace Chess.Models.Pieces
                 throw new ArgumentException("Invalid move for the specified piece");
             }
 
+            int validationReturn = 0;
+            if (distanceX == distanceY)
+            {
+                validationReturn = Bishop.PieceInWay(this, positionXY, distanceX, distanceY, true);
+            } else
+            {
+                validationReturn = Rook.ValidRookMove((distanceX == 0) ? distanceY : distanceX, 
+                    (distanceX == 0) ? positionXY[1] : positionXY[0], (distanceX != 0), this, true);
+            }
+
             ChessController.Board.gameSpace[positionXY[0], positionXY[1]] = this;
             ChessController.Board.gameSpace[XPosition, YPosition] = new EmptyPiece(XPosition, YPosition);
 

@@ -51,7 +51,7 @@ namespace Chess.Models.Pieces
             return 0;
         }
 
-        protected static int ValidRookMove(int absDist, int changedPos, bool isX, Object obj, bool isQueen)
+        public static int ValidRookMove(int absDist, int changedPos, bool isX, Object obj, bool isQueen)
         {
             Piece piece;
 

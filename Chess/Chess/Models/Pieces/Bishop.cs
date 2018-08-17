@@ -44,7 +44,7 @@ namespace Chess.Models.Pieces
             return 0;
         }
 
-        protected static int PieceInWay(Object obj, int[] positionXY, int distanceX, int distanceY, bool isQueen)
+        public static int PieceInWay(Object obj, int[] positionXY, int distanceX, int distanceY, bool isQueen)
         {
             Piece piece;
 
