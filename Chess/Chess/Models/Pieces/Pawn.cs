@@ -33,9 +33,7 @@ namespace Chess.Models.Pieces
             {
                 if (distanceX == 1 && distanceY == 1)
                 {
-                    if (!(Char.IsLower(this.GetSymbol()) ?
-                        Char.IsUpper(ChessController.Board.gameSpace[positionXY[0], positionXY[1]].GetSymbol()) :
-                        Char.IsLower(ChessController.Board.gameSpace[positionXY[0], positionXY[1]].GetSymbol())))
+                    if (IsSameColor(positionXY))
                     {
                         throw new Exception("You cannot take your own piece");
                     }

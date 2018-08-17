@@ -32,9 +32,7 @@ namespace Chess.Models.Pieces
 
             if (ChessController.Board.gameSpace[positionXY[0], positionXY[1]].GetType() != typeof(EmptyPiece))
             {
-                if (!(Char.IsLower(this.GetSymbol()) ?
-                    Char.IsUpper(ChessController.Board.gameSpace[positionXY[0], positionXY[1]].GetSymbol()) :
-                    Char.IsLower(ChessController.Board.gameSpace[positionXY[0], positionXY[1]].GetSymbol())))
+                if (IsSameColor(positionXY))
                 {
                     throw new Exception("You cannot take your own piece");
                 }
