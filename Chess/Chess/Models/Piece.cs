@@ -31,6 +31,11 @@ namespace Chess.Models
             YPosition = positionXY[1];
         }
 
+        public bool IsSameColor(int[] positionXY)
+        {
+            return !(Char.IsUpper(ChessController.Board.gameSpace[positionXY[0], positionXY[1]].GetSymbol()) ^ Char.IsUpper(GetSymbol()));
+        }
+
         public Piece(Char symbol, int xPosition, int yPosition)
         {
             this.symbol = symbol;
