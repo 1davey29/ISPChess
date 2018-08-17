@@ -10,6 +10,7 @@ namespace Chess.Models.Pieces
 {
     public class Rook : Piece
     {
+        private bool hasMoved = false;
         public override int Move(string newPosition)
         {
             int[] positionXY;
@@ -47,6 +48,8 @@ namespace Chess.Models.Pieces
 
             XPosition = positionXY[0];
             YPosition = positionXY[1];
+
+            hasMoved = true;
 
             return 0;
         }
