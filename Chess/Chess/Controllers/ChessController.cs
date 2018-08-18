@@ -48,6 +48,7 @@ namespace Chess.Controllers
                         switch (movementResult)
                         {
                             case 0:
+                                Board.DisplayBoard();
                                 break;
                             case 1:
                                 Console.WriteLine($"Invalid movement for a {Board.gameSpace[piece[0], piece[1]].GetType().ToString()}!");
@@ -61,10 +62,6 @@ namespace Chess.Controllers
                             case 4:
                                 Console.WriteLine("Invalid movement, out of bounds!");
                                 break;
-                        }
-                        if (movementResult == 0)
-                        {
-                            Board.DisplayBoard();
                         }
 
                         break;
