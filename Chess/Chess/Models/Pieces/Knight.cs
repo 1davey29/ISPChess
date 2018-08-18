@@ -23,7 +23,7 @@ namespace Chess.Models.Pieces
                 throw new ArgumentOutOfRangeException("The position specified is out of bounds!");
             }
 
-            if (!(distanceX == 2 && distanceY == 1) ^ !(distanceX == 1 && distanceY == 2))
+            if (!(distanceX == 2 && distanceY == 1) && !(distanceX == 1 && distanceY == 2))
             {
                 throw new ArgumentException("Invalid move for the specified piece");
             }
