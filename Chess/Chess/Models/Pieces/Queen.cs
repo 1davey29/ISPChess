@@ -21,12 +21,12 @@ namespace Chess.Models.Pieces
 
             if ((positionXY[0] < 0 || positionXY[0] > 7) || (positionXY[1] < 0 || positionXY[1] > 7))
             {
-                throw new ArgumentOutOfRangeException("The position specified is out of bounds!");
+                return 4;
             }
 
             if ((distanceX != 0 && distanceY != 0) && (distanceX != distanceY))
             {
-                throw new ArgumentException("Invalid move for the specified piece");
+                return 1;
             }
 
             int validationReturn = 0;

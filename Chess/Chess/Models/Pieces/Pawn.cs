@@ -21,12 +21,12 @@ namespace Chess.Models.Pieces
 
             if ((positionXY[0] < 0 || positionXY[0] > 7) || (positionXY[1] < 0 || positionXY[1] > 7))
             {
-                throw new ArgumentOutOfRangeException("The position specified is out of bounds!");
+                return 4;
             }
 
             if ((distanceX != 0 && ((!hasMoved && distanceY > 2) || distanceY > 1)) ^ (distanceX != 1 && distanceY != 1))
             {
-                throw new ArgumentException("Invalid move for the specified piece");
+                return 1;
             }
 
             if (ChessController.Board.gameSpace[positionXY[0], positionXY[1]].GetType() != typeof(EmptyPiece))
@@ -35,7 +35,7 @@ namespace Chess.Models.Pieces
                 {
                     if (IsSameColor(positionXY))
                     {
-                        throw new Exception("You cannot take your own piece");
+                        return 2;
                     }
 
                     UpdateBoard(positionXY);
@@ -43,7 +43,11 @@ namespace Chess.Models.Pieces
                 }
                 else
                 {
-                    throw new Exception("Invalid move");
+                    if (IsSameColor(positionXY))
+                    {
+                        return 2;
+                    }
+                    return 3;
                 }
             }
 
@@ -56,7 +60,11 @@ namespace Chess.Models.Pieces
 
                     if (ChessController.Board.gameSpace[positionXY[0], y].GetType() != typeof(EmptyPiece))
                     {
-                        throw new Exception("Cannot move through pieces");
+                        if (IsSameColor(positionXY))
+                        {
+                            return 2;
+                        }
+                        return 3;
                     }
 
                     if (YPosition - positionXY[1] > 0)

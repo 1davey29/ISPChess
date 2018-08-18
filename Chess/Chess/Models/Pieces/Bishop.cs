@@ -20,12 +20,12 @@ namespace Chess.Models.Pieces
 
             if ((positionXY[0] < 0 || positionXY[0] > 7) || (positionXY[1] < 0 || positionXY[1] > 7))
             {
-                throw new ArgumentOutOfRangeException("The position specified is out of bounds!");
+                return 4;
             }
 
             if (distanceX != distanceY)
             {
-                throw new ArgumentException("Invalid move for the specified piece");
+                return 1;
             }
 
             switch (PieceInWay(this, positionXY, distanceX, distanceY, false))
@@ -65,13 +65,17 @@ namespace Chess.Models.Pieces
                             {
                                 if (piece.IsSameColor(positionXY))
                                 {
-                                    throw new Exception("You cannot take your own piece");
+                                    return 2;
                                     
                                 }
                             }
                             else
                             {
-                                throw new Exception("Cannot move through other pieces");
+                                if (piece.IsSameColor(positionXY))
+                                {
+                                    return 2;
+                                }
+                                return 3;
                             }
 
                         }
