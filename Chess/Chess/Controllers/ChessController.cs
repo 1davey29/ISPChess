@@ -14,10 +14,12 @@ namespace Chess.Controllers
     {
         private static string filePath;
 
-        public static Board Board { get; set; } = new Board();
+        public static Board Board { get; set; } = new Board("No Pawns");
 
         public static void Run()
         {
+            Board.DisplayBoard();
+
             Console.Write("Please enter the file path of your move file: ");
 
             SetMoveFilePath(Console.ReadLine());
@@ -33,19 +35,36 @@ namespace Chess.Controllers
                 {
                     case 1:
 
-                        PlacePiece(move);
+                        //PlacePiece(move);
 
                         break;
 
                     case 2:
 
-                        MovePiece(move);
+                        int[] piece = ConvertToXY(move.Substring(0,2));
+
+                        if (Board.gameSpace[piece[0], piece[1]].Move(move.Substring(3)) == 0)
+                        {
+                            Board.DisplayBoard();
+                        }
 
                         break;
 
                     case 3:
 
-                        MoveTwoPieces(move);
+                        int[] piece1 = ConvertToXY(move.Substring(0, 2));
+
+                        if (Board.gameSpace[piece1[0], piece1[1]].Move(move.Substring(3, 2)) == 0)
+                        {
+                            Board.DisplayBoard();
+                        }
+
+                        int[] piece2 = ConvertToXY(move.Substring(6, 2));
+
+                        if (Board.gameSpace[piece2[0], piece2[2]].Move(move.Substring(9)) == 0)
+                        {
+                            Board.DisplayBoard();
+                        }
 
                         break;
 
