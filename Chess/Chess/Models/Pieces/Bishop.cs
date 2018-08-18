@@ -52,9 +52,9 @@ namespace Chess.Models.Pieces
                 piece = obj as Bishop;
             }
 
-            for (int x = (piece.XPosition - positionXY[0] > 0) ? positionXY[0] : distanceX; (piece.XPosition - positionXY[0] > 0) ? x <= distanceX : x >= positionXY[0];)
+            for (int x = (piece.XPosition - positionXY[0] > 0) ? positionXY[0] : piece.XPosition; (piece.XPosition - positionXY[0] > 0) ? x <= distanceX : x >= positionXY[0];)
             {
-                for (int y = (piece.YPosition - positionXY[1] > 0) ? positionXY[1] : distanceY; (piece.YPosition - positionXY[1] > 0) ? y <= distanceY : y >= positionXY[1];)
+                for (int y = (piece.YPosition - positionXY[1] > 0) ? positionXY[1] : piece.YPosition; (piece.YPosition - positionXY[1] > 0) ? y <= distanceY : y >= positionXY[1];)
                 {
                     if (Math.Abs(x) == Math.Abs(y))
                     {
