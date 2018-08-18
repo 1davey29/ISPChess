@@ -52,41 +52,37 @@ namespace Chess.Models.Pieces
                 piece = obj as Bishop;
             }
 
-            for (int x = (piece.XPosition - positionXY[0] > 0) ? positionXY[0] : piece.XPosition; (piece.XPosition - positionXY[0] > 0) ? x <= distanceX : x >= positionXY[0];)
+            bool IsXPositive = (piece.XPosition - positionXY[0] > 0);
+            bool IsYPositive = (piece.YPosition - positionXY[1] > 0);
+            for (int x = IsXPositive ? positionXY[0] : piece.XPosition; 
+                IsXPositive ? x <= distanceX : x >= positionXY[0];)
             {
-                for (int y = (piece.YPosition - positionXY[1] > 0) ? positionXY[1] : piece.YPosition; (piece.YPosition - positionXY[1] > 0) ? y <= distanceY : y >= positionXY[1];)
+                for (int y = IsYPositive ? positionXY[1] : piece.YPosition; 
+                    IsYPositive ? y <= distanceY : y >= positionXY[1];)
                 {
                     if (Math.Abs(x) == Math.Abs(y))
                     {
-
                         if (ChessController.Board.gameSpace[x, y].GetType() != typeof(EmptyPiece))
                         {
-                            if (((piece.XPosition - positionXY[0] > 0) ? x == positionXY[0] : x == distanceX) && ((piece.YPosition - positionXY[1] > 0) ? y == positionXY[1] : y == distanceY))
+                            if (piece.IsSameColor(positionXY))
                             {
-                                if (piece.IsSameColor(positionXY))
-                                {
-                                    return 2;
-                                    
-                                }
-                            }
-                            else
-                            {
-                                if (piece.IsSameColor(positionXY))
-                                {
-                                    return 2;
-                                }
-                                return 3;
+                                return 2;
                             }
 
+                            if (!((IsXPositive ? x == positionXY[0] : x == distanceX) && 
+                                (IsYPositive ? y == positionXY[1] : y == distanceY)))
+                            {
+                                return 3;
+                            }
                         }
                     }
 
-                    if (piece.XPosition - positionXY[0] > 0)
+                    if (IsXPositive)
                         x++;
                     else
                         x--;
 
-                    if (piece.YPosition - positionXY[1] > 0)
+                    if (IsYPositive)
                         y++;
                     else
                         y--;

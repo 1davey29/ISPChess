@@ -37,9 +37,9 @@ namespace Chess.Models.Pieces
                     return 2;
                 }
 
-                UpdateBoard(positionXY);
 
             }
+            UpdateBoard(positionXY);
 
             hasMoved = true;
 
