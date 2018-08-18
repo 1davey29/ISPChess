@@ -43,7 +43,26 @@ namespace Chess.Controllers
 
                         int[] piece = ConvertToXY(move.Substring(0,2));
 
-                        if (Board.gameSpace[piece[0], piece[1]].Move(move.Substring(3)) == 0)
+                        int movementResult = Board.gameSpace[piece[0], piece[1]].Move(move.Substring(3));
+
+                        switch (movementResult)
+                        {
+                            case 0:
+                                break;
+                            case 1:
+                                Console.WriteLine($"Invalid movement for a {Board.gameSpace[piece[0], piece[1]].GetType().ToString()}!");
+                                break;
+                            case 2:
+                                Console.WriteLine("You cannot move through your own pieces!");
+                                break;
+                            case 3:
+                                Console.WriteLine("You cannot move through enemy pieces!");
+                                break;
+                            case 4:
+                                Console.WriteLine("Invalid movement, out of bounds!");
+                                break;
+                        }
+                        if (movementResult == 0)
                         {
                             Board.DisplayBoard();
                         }
