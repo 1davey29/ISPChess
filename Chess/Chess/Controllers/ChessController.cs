@@ -14,7 +14,7 @@ namespace Chess.Controllers
     {
         private static string filePath;
 
-        public static Board Board { get; set; } = new Board("No Pawns");
+        public static Board Board { get; set; } = new Board("Full Start");
 
         public static void Run()
         {
@@ -52,7 +52,7 @@ namespace Chess.Controllers
                                 Board.DisplayBoard();
                                 break;
                             case 1:
-                                Console.WriteLine($"Invalid movement for a {Board.gameSpace[piece[0], piece[1]].GetType().ToString()}!");
+                                Console.WriteLine($"Invalid movement for a {Board.gameSpace[piece[0], piece[1]].GetType().Name}!");
                                 break;
                             case 2:
                                 Console.WriteLine("You cannot move through your own pieces!");

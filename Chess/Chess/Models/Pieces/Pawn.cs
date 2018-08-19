@@ -24,7 +24,7 @@ namespace Chess.Models.Pieces
                 return 4;
             }
 
-            if ((distanceX != 0 && ((!hasMoved && distanceY > 2) || distanceY > 1)) ^ (distanceX != 1 && distanceY != 1))
+            if ((distanceY == 0 && ((hasMoved) ? distanceX > 1 : distanceX > 2) ^ (distanceX != 1 && distanceY != 1)))
             {
                 return 1;
             }
