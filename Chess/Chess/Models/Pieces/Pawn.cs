@@ -24,9 +24,12 @@ namespace Chess.Models.Pieces
                 return 4;
             }
 
-            if ((distanceY == 0 && ((hasMoved) ? distanceX > 1 : distanceX > 2) ^ (distanceX == 1 && distanceY == 1)))
+            if ((distanceY == 0 && (hasMoved) ? distanceX > 1 : distanceX > 2))
             {
-                return 1;
+                if (distanceX != 1 && distanceY != 1)
+                {
+                    return 1;
+                }
             }
 
             if (ChessController.Board.gameSpace[positionXY[0], positionXY[1]].GetType() != typeof(EmptyPiece))
@@ -49,6 +52,9 @@ namespace Chess.Models.Pieces
                     }
                     return 3;
                 }
+            } else if (distanceX == 1 && distanceY == 1)
+            {
+                return 1;
             }
 
             if (distanceY == 2)
