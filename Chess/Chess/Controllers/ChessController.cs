@@ -14,7 +14,7 @@ namespace Chess.Controllers
     {
         private static string filePath;
 
-        public static Board Board { get; set; } = new Board("Full Start");
+        public static Board Board { get; set; } = new Board("No Pawn");
 
         public static void Run()
         {

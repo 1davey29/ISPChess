@@ -22,22 +22,19 @@ namespace Chess.Models.Pieces
             {
                 return 4;
             }
-
+            
             if (distanceX != distanceY)
             {
                 return 1;
             }
 
-            switch (PieceInWay(this, positionXY, distanceX, distanceY, false))
+            int validationReturn = PieceInWay(this, positionXY, distanceX, distanceY, false);
+            if (validationReturn == 0)
             {
-                case 0:
-                    UpdateBoard(positionXY);
-
-                    break;
-            } 
-
+                UpdateBoard(positionXY);
+            }
             
-            return 0;
+            return validationReturn;
         }
 
         public static int PieceInWay(Object obj, int[] positionXY, int distanceX, int distanceY, bool isQueen)
@@ -54,39 +51,43 @@ namespace Chess.Models.Pieces
 
             bool IsXPositive = (piece.XPosition - positionXY[0] > 0);
             bool IsYPositive = (piece.YPosition - positionXY[1] > 0);
-            for (int x = IsXPositive ? positionXY[0] : piece.XPosition; 
-                IsXPositive ? x > piece.XPosition : x < piece.XPosition;)
+
+            int xIter = 0;
+            int yIter = 0;
+            for (int x = piece.XPosition; (IsXPositive) ? x > positionXY[0] : x < positionXY[0];)
             {
-                for (int y = IsYPositive ? positionXY[1] : piece.YPosition; 
-                    IsYPositive ? y > piece.YPosition : y < piece.YPosition;)
+                xIter++;
+                yIter = 0;
+                for (int y = piece.YPosition; (IsYPositive) ? y > positionXY[1] : y < positionXY[1];)
                 {
-                    if (Math.Abs(x) == Math.Abs(y))
+                    yIter++;
+                    if (xIter != 1 && (xIter == yIter))
                     {
                         if (ChessController.Board.gameSpace[x, y].GetType() != typeof(EmptyPiece))
                         {
-                            if (piece.IsSameColor(positionXY))
+                            int[] testedPositon = { x, y };
+                            if (piece.IsSameColor(testedPositon))
                             {
                                 return 2;
                             }
 
-                            if (!((IsXPositive ? x == positionXY[0] : x == distanceX) && 
-                                (IsYPositive ? y == positionXY[1] : y == distanceY)))
+                            if (!((x == positionXY[0]) && (y == positionXY[1])))
                             {
                                 return 3;
                             }
                         }
                     }
 
-                    if (IsXPositive)
-                        x++;
-                    else
-                        x--;
 
                     if (IsYPositive)
-                        y++;
-                    else
                         y--;
+                    else
+                        y++;
                 }
+                    if (IsXPositive)
+                        x--;
+                    else
+                        x++;
             }
 
             return 0;
