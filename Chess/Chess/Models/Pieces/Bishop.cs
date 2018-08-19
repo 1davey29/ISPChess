@@ -55,10 +55,10 @@ namespace Chess.Models.Pieces
             bool IsXPositive = (piece.XPosition - positionXY[0] > 0);
             bool IsYPositive = (piece.YPosition - positionXY[1] > 0);
             for (int x = IsXPositive ? positionXY[0] : piece.XPosition; 
-                IsXPositive ? x <= distanceX : x >= positionXY[0];)
+                IsXPositive ? x > piece.XPosition : x < piece.XPosition;)
             {
                 for (int y = IsYPositive ? positionXY[1] : piece.YPosition; 
-                    IsYPositive ? y <= distanceY : y >= positionXY[1];)
+                    IsYPositive ? y > piece.YPosition : y < piece.YPosition;)
                 {
                     if (Math.Abs(x) == Math.Abs(y))
                     {
