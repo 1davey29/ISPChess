@@ -39,14 +39,12 @@ namespace Chess.Models.Pieces
                     (distanceX == 0) ? positionXY[1] : positionXY[0], (distanceX != 0), this, true);
             }
 
-            switch (validationReturn)
+            if (validationReturn == 0)
             {
-                case 0:
-                    UpdateBoard(positionXY);
-                    break;
+                UpdateBoard(positionXY);
             }
 
-            return 0;
+            return validationReturn;
         }
 
         public Queen(String color, int x, int y) : base(color.Equals("White") ? 'q' : 'Q', x, y)
