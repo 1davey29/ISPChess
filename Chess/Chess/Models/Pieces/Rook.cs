@@ -63,6 +63,8 @@ namespace Chess.Models.Pieces
                 piece = obj as Rook;
             }
 
+            bool taken = false;
+
             for (int i = 0; i < absDist; i++)
             {
                 if (isX)
@@ -82,11 +84,12 @@ namespace Chess.Models.Pieces
 
                                 if (Char.IsUpper(ChessController.Board.gameSpace[changedPos - i, piece.YPosition].GetSymbol()) ^ Char.IsUpper(piece.GetSymbol()))
                                 {
-                                    throw new InvalidOperationException("Error: Cannot take Enemy King, Enemy King in check");
+                                    //Change later, king check
+                                    return 3;
                                 }
                                 else
                                 {
-                                    throw new InvalidOperationException("Error: Invalid Movement, Cannot move through your own piece");
+                                    return 2;
                                 }
 
                             case 2:
@@ -95,16 +98,18 @@ namespace Chess.Models.Pieces
                                 {
                                     if (i == 0)
                                     {
-                                        return 1;
+                                        taken = true;
+
+                                        break;
                                     }
                                     else
                                     {
-                                        throw new InvalidOperationException("Error: Invalid Movement, Cannot move through enemy piece");
+                                        return 3;
                                     }
                                 }
                                 else
                                 {
-                                    throw new InvalidOperationException("Error: Invalid Movement, Cannot move through your own piece");
+                                    return 2;
                                 }
 
                             default:
@@ -127,11 +132,11 @@ namespace Chess.Models.Pieces
 
                                 if (Char.IsUpper(ChessController.Board.gameSpace[changedPos + i, piece.YPosition].GetSymbol()) ^ Char.IsUpper(piece.GetSymbol()))
                                 {
-                                    throw new InvalidOperationException("Error: Cannot take Enemy King, Enemy King in check");
+                                    return 3;
                                 }
                                 else
                                 {
-                                    throw new InvalidOperationException("Error: Invalid Movement, Cannot move through your own piece");
+                                    return 2;
                                 }
 
                             case 2:
@@ -140,16 +145,19 @@ namespace Chess.Models.Pieces
                                 {
                                     if (i == 0)
                                     {
-                                        return 1;
+
+                                        taken = true;
+
+                                        break;
                                     }
                                     else
                                     {
-                                        throw new InvalidOperationException("Error: Invalid Movement, Cannot move through enemy piece");
+                                        return 3;
                                     }
                                 }
                                 else
                                 {
-                                    throw new InvalidOperationException("Error: Invalid Movement, Cannot move through your own piece");
+                                    return 2;
                                 }
 
                             default:
@@ -175,11 +183,11 @@ namespace Chess.Models.Pieces
 
                                 if (Char.IsUpper(ChessController.Board.gameSpace[piece.XPosition, changedPos - i].GetSymbol()) ^ Char.IsUpper(piece.GetSymbol()))
                                 {
-                                    throw new InvalidOperationException("Error: Cannot take Enemy King, Enemy King in check");
+                                    return 3;
                                 }
                                 else
                                 {
-                                    throw new InvalidOperationException("Error: Invalid Movement, Cannot move through your own piece");
+                                    return 2;
                                 }
 
                             case 2:
@@ -188,16 +196,18 @@ namespace Chess.Models.Pieces
                                 {
                                     if (i == 0)
                                     {
-                                        return 1;
+                                        taken = true;
+
+                                        break;
                                     }
                                     else
                                     {
-                                        throw new InvalidOperationException("Error: Invalid Movement, Cannot move through enemy piece");
+                                        return 3;
                                     }
                                 }
                                 else
                                 {
-                                    throw new InvalidOperationException("Error: Invalid Movement, Cannot move through your own piece");
+                                    return 2;
                                 }
 
                             default:
@@ -220,11 +230,11 @@ namespace Chess.Models.Pieces
 
                                 if (Char.IsUpper(ChessController.Board.gameSpace[piece.XPosition, changedPos + i].GetSymbol()) ^ Char.IsUpper(piece.GetSymbol()))
                                 {
-                                    throw new InvalidOperationException("Error: Cannot take Enemy King, Enemy King in check");
+                                    return 3;
                                 }
                                 else
                                 {
-                                    throw new InvalidOperationException("Error: Invalid Movement, Cannot move through your own piece");
+                                    return 2;
                                 }
 
                             case 2:
@@ -233,16 +243,18 @@ namespace Chess.Models.Pieces
                                 {
                                     if (i == 0)
                                     {
-                                        return 1;
+                                        taken = true;
+
+                                        break;
                                     }
                                     else
                                     {
-                                        throw new InvalidOperationException("Error: Invalid Movement, Cannot move through enemy piece");
+                                        return 3;
                                     }
                                 }
                                 else
                                 {
-                                    throw new InvalidOperationException("Error: Invalid Movement, Cannot move through your own piece");
+                                    return 2;
                                 }
 
                             default:
