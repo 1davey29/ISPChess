@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Chess.Enums;
 using Chess.Models;
 using Chess.Models.Pieces;
 
@@ -14,7 +14,7 @@ namespace Chess.Controllers
     {
         private static string filePath;
 
-        public static Board Board { get; set; } = new Board("No Pawn");
+        public static Board Board { get; set; } = new Board(LaunchState.FullStart);
 
         public static void Run()
         {

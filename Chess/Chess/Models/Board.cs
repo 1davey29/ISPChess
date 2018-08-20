@@ -1,4 +1,5 @@
-﻿using Chess.Models.Pieces;
+﻿using Chess.Enums;
+using Chess.Models.Pieces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +12,13 @@ namespace Chess.Models
     {
         public Piece[,] gameSpace { get; set; }
 
-        public Board(String state = "Empty")
+        public Board(LaunchState launchState = LaunchState.Empty)
         {
             gameSpace = new Piece[8, 8];
 
-            switch (state)
+            switch (launchState)
             {
-                case "Empty":
+                case LaunchState.Empty:
 
                     for (int x = 0; x < 8; x++)
                     {
@@ -29,7 +30,7 @@ namespace Chess.Models
 
                     break;
 
-                case "No Pawns":
+                case LaunchState.NoPawns:
 
                     for (int x = 0; x < 8; x++)
                     {
@@ -96,7 +97,7 @@ namespace Chess.Models
 
                     break;
 
-                case "Full Start":
+                case LaunchState.FullStart:
 
                     for (int x = 0; x < 8; x++)
                     {
