@@ -20,9 +20,9 @@ namespace Chess.Models
             {
                 case LaunchState.Empty:
 
-                    for (int x = 0; x < 8; x++)
+                    for (int y = 0; y < 8; y++)
                     {
-                        for (int y = 0; y < 8; y++)
+                        for (int x = 0; x < 8; x++)
                         {
                             gameSpace[x, y] = new EmptyPiece(x, y);
                         }
@@ -32,55 +32,55 @@ namespace Chess.Models
 
                 case LaunchState.NoPawns:
 
-                    for (int x = 0; x < 8; x++)
+                    for (int y = 0; y < 8; y++)
                     {
-                        if(x == 0)
+                        if(y == 7)
                         {
-                            for (int y = 0; y < 8; y++)
+                            for (int x = 0; x < 8; x++)
                             {
-                                if (y == 0 | y == 7)
+                                if (x == 0 | x == 7)
                                 {
                                     gameSpace[x, y] = new Rook("White", x, y);
                                 }
-                                else if (y == 1 | y == 6)
+                                else if (x == 1 | x == 6)
                                 {
                                     gameSpace[x, y] = new Knight("White", x, y);
                                 }
-                                else if (y == 2 | y == 5)
+                                else if (x == 2 | x == 5)
                                 {
                                     gameSpace[x, y] = new Bishop("White", x, y);
                                 }
-                                else if (y == 3)
+                                else if (x == 3)
                                 {
                                     gameSpace[x, y] = new Queen("White", x, y);
                                 }
-                                else if (y == 4)
+                                else if (x == 4)
                                 {
                                     gameSpace[x, y] = new King("White", x, y);
                                 }
                             }
                         }
-                        else if (x == 7)
+                        else if (y == 0)
                         {
-                            for (int y = 0; y < 8; y++)
+                            for (int x = 0; x < 8; x++)
                             {
-                                if (y == 0 | y == 7)
+                                if (x == 0 | x == 7)
                                 {
                                     gameSpace[x, y] = new Rook("Black", x, y);
                                 }
-                                else if (y == 1 | y == 6)
+                                else if (x == 1 | x == 6)
                                 {
                                     gameSpace[x, y] = new Knight("Black", x, y);
                                 }
-                                else if (y == 2 | y == 5)
+                                else if (x == 2 | x == 5)
                                 {
                                     gameSpace[x, y] = new Bishop("Black", x, y);
                                 }
-                                else if (y == 3)
+                                else if (x == 3)
                                 {
                                     gameSpace[x, y] = new Queen("Black", x, y);
                                 }
-                                else if (y == 4)
+                                else if (x == 4)
                                 {
                                     gameSpace[x, y] = new King("Black", x, y);
                                 }
@@ -88,7 +88,7 @@ namespace Chess.Models
                         }
                         else
                         {
-                            for (int y = 0; y < 8; y++)
+                            for (int x = 0; x < 8; x++)
                             {
                                 gameSpace[x, y] = new EmptyPiece(x, y);
                             }
@@ -99,69 +99,69 @@ namespace Chess.Models
 
                 case LaunchState.FullStart:
 
-                    for (int x = 0; x < 8; x++)
+                    for (int y = 0; y < 8; y++)
                     {
-                        if (x == 0)
+                        if (y == 7)
                         {
-                            for (int y = 0; y < 8; y++)
+                            for (int x = 0; x < 8; x++)
                             {
-                                if (y == 0 | y == 7)
+                                if (x == 0 | x == 7)
                                 {
                                     gameSpace[x, y] = new Rook("White", x, y);
                                 }
-                                else if (y == 1 | y == 6)
+                                else if (x == 1 | x == 6)
                                 {
                                     gameSpace[x, y] = new Knight("White", x, y);
                                 }
-                                else if (y == 2 | y == 5)
+                                else if (x == 2 | x == 5)
                                 {
                                     gameSpace[x, y] = new Bishop("White", x, y);
                                 }
-                                else if (y == 3)
+                                else if (x == 3)
                                 {
                                     gameSpace[x, y] = new Queen("White", x, y);
                                 }
-                                else if (y == 4)
+                                else if (x == 4)
                                 {
                                     gameSpace[x, y] = new King("White", x, y);
                                 }
                             }
                         }
-                        else if (x == 1)
+                        else if (y == 6)
                         {
-                            for (int y = 0; y < 8; y++)
+                            for (int x = 0; x < 8; x++)
                             {
                                 gameSpace[x, y] = new Pawn("White", x, y);
                             }
                         }
-                        else if (x == 6)
+                        else if (y == 1)
                         {
-                            for (int y = 0; y < 8; y++)
+                            for (int x = 0; x < 8; x++)
                             {
                                 gameSpace[x, y] = new Pawn("Black", x, y);
                             }
                         }
-                        else if (x == 7)
+                        else if (y == 0)
                         {
-                            for (int y = 0; y < 8; y++)
+                            for (int x = 0; x < 8; x++)
                             {
-                                if (y == 0 | y == 7)
+                                if (x == 0 | x == 7)
                                 {
                                     gameSpace[x, y] = new Rook("Black", x, y);
                                 }
-                                else if (y == 1 | y == 6)
+                                else if (x == 1 | x == 6)
                                 {
                                     gameSpace[x, y] = new Knight("Black", x, y);
                                 }
-                                else if (y == 2 | y == 5)
+                                else if (x == 2 | x == 5)
                                 {
                                     gameSpace[x, y] = new Bishop("Black", x, y);
                                 }
-                                else if (y == 3)
+                                else if (x == 3)
                                 {
                                     gameSpace[x, y] = new Queen("Black", x, y);
                                 }
-                                else if (y == 4)
+                                else if (x == 4)
                                 {
                                     gameSpace[x, y] = new King("Black", x, y);
                                 }
@@ -169,7 +169,7 @@ namespace Chess.Models
                         }
                         else
                         {
-                            for (int y = 0; y < 8; y++)
+                            for (int x = 0; x < 8; x++)
                             {
                                 gameSpace[x, y] = new EmptyPiece(x, y);
                             }
@@ -186,17 +186,13 @@ namespace Chess.Models
 
         public void DisplayBoard()
         {
-            int iterationCounter = 0;
-
-            foreach (Piece p in gameSpace)
+            for (int y = 0; y < 8; y++)
             {
-                iterationCounter++;
-                Console.Write($"{p.GetSymbol()} ");
-
-                if (iterationCounter % 8 == 0)
+                for (int x = 0; x < 8; x++)
                 {
-                    Console.WriteLine();
+                    Console.Write($"{gameSpace[x, y].GetSymbol()} ");
                 }
+                Console.WriteLine();
             }
         }
     }

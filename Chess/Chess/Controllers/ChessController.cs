@@ -166,14 +166,14 @@ namespace Chess.Controllers
                 return 1;
 
             String square = move.Substring(2);
-            Int32 x;
+            Int32 y;
 
-            if (!Int32.TryParse(square.Substring(1), out x))
+            if (!Int32.TryParse(square.Substring(1), out y))
                 return 1;
 
-            x = 8 - x;
+            y = 8 - y;
 
-            Int32 y = (Convert.ToInt32(Convert.ToChar(square.Substring(0, 1).ToUpper()) - 65));
+            Int32 x = (Convert.ToInt32(Convert.ToChar(square.Substring(0, 1).ToUpper()) - 65));
 
             if (Board.gameSpace[x, y] is EmptyPiece)
             {
@@ -234,13 +234,13 @@ namespace Chess.Controllers
 
         public static int[] ConvertToXY(string position)
         {
-            Int32 x;
+            Int32 y;
 
-            Int32.TryParse(position.Substring(1), out x);
+            Int32.TryParse(position.Substring(1), out y);
 
-            x = 8 - x;
+            y = 8 - y;
 
-            Int32 y = (Convert.ToInt32(Convert.ToChar(position.Substring(0, 1).ToUpper()) - 65));
+            Int32 x = (Convert.ToInt32(Convert.ToChar(position.Substring(0, 1).ToUpper()) - 65));
 
             int[] positionXY = { x, y };
             return positionXY;

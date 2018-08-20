@@ -67,7 +67,7 @@ namespace Chess.Models.Pieces
 
             for (int i = 0; i < absDist; i++)
             {
-                if (isX)
+                if (!isX)
                 {
                     if (changedPos - piece.XPosition > 0)
                     {
