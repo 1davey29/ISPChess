@@ -30,17 +30,24 @@ namespace Chess.Models.Pieces
                 return 1;
             }
 
+            int valid;
+
             if (distanceX == 0 && distanceY != 0)
             {
-                ValidRookMove(distanceY, positionXY[1], false, this, false);
+                valid = ValidRookMove(distanceY, positionXY[1], false, this, false);
             }
             else if (distanceY == 0 && distanceX != 0)
             {
-                ValidRookMove(distanceX, positionXY[0], true, this, false);
+                valid = ValidRookMove(distanceX, positionXY[0], true, this, false);
             }
             else
             {
                 throw new Exception("Error in code, unreachable state");
+            }
+
+            if (valid != 0)
+            {
+                return valid;
             }
 
             UpdateBoard(positionXY);
@@ -67,7 +74,7 @@ namespace Chess.Models.Pieces
 
             for (int i = 0; i < absDist; i++)
             {
-                if (!isX)
+                if (isX)
                 {
                     if (changedPos - piece.XPosition > 0)
                     {
