@@ -40,9 +40,6 @@ namespace Chess.Models.Pieces
                     {
                         return 2;
                     }
-
-                    UpdateBoard(positionXY);
-
                 }
                 else
                 {
@@ -78,7 +75,9 @@ namespace Chess.Models.Pieces
                     else
                         y--;
                 }
-            } 
+            }
+
+            UpdateBoard(positionXY);
 
             hasMoved = true;
 
