@@ -26,23 +26,33 @@ namespace Chess.Controllers
             SetMoveFilePath(Console.ReadLine());
 
             List<String> moves = LoadMoveFile();
-            int iter = 1;
 
             foreach (String move in moves)
             {
-                int type = RecognizeMoveType(move);
 
-                switch (type)
-                {
-                    case 1:
+                TakeTurn(move);
 
-                        //PlacePiece(move);
+            }
+        }
 
-                        break;
+        public static void TakeTurn(String move)
+        {
+            int type = RecognizeMoveType(move);
 
-                    case 2:
+            switch (type)
+            {
+                case 1:
 
-                        int[] piece = ConvertToXY(move.Substring(0,2));
+                    //PlacePiece(move);
+
+                    break;
+
+                case 2:
+
+                    int[] piece = ConvertToXY(move.Substring(0, 2));
+
+                    if (isWhite == Char.IsLower(Board.gameSpace[piece[0], piece[1]].GetSymbol()))
+                    {
 
                         int movementResult = Board.gameSpace[piece[0], piece[1]].Move(move.Substring(3));
 
@@ -66,40 +76,60 @@ namespace Chess.Controllers
                                 break;
                         }
 
-                        break;
+                        Board.DisplayBoard();
 
-                    case 3:
+                        isWhite = !isWhite;
+                    }
 
-                        int[] piece1 = ConvertToXY(move.Substring(0, 2));
+                    break;
+
+                case 3:
+
+                    bool lastValid = false;
+                    int[] piece1 = ConvertToXY(move.Substring(0, 2));
+
+                    if (isWhite == Char.IsLower(Board.gameSpace[piece1[0], piece1[1]].GetSymbol()))
+                    {
 
                         if (Board.gameSpace[piece1[0], piece1[1]].Move(move.Substring(3, 2)) == 0)
                         {
-                            Board.DisplayBoard();
+                            lastValid = true;
+                        }
+                        else
+                        {
+                            lastValid = false;
                         }
 
-                        int[] piece2 = ConvertToXY(move.Substring(6, 2));
+                    }
+
+                    int[] piece2 = ConvertToXY(move.Substring(6, 2));
+
+                    if (isWhite == Char.IsLower(Board.gameSpace[piece2[0], piece2[1]].GetSymbol()) && lastValid)
+                    {
 
                         if (Board.gameSpace[piece2[0], piece2[2]].Move(move.Substring(9)) == 0)
                         {
                             Board.DisplayBoard();
+
+                            isWhite = !isWhite;
                         }
 
-                        break;
+                    }
 
-                    case 0:
+                    break;
 
-                        Console.WriteLine("---------------");
-                        Console.WriteLine($"Move {iter} is an invalid move");
+                case 0:
 
-                        break;
+                    //Console.WriteLine("---------------");
+                    //Console.WriteLine($"Move {iter} is an invalid move");
 
-                    default:
+                    break;
 
-                        Console.WriteLine("Error in code");
+                default:
 
-                        break;
-                }
-                iter++;
+                    Console.WriteLine("Error in code");
+
+                    break;
             }
         }
 
