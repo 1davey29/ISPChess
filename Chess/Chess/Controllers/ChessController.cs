@@ -13,7 +13,7 @@ namespace Chess.Controllers
     public static class ChessController
     {
         private static string filePath;
-        private static bool isWhite;
+        private static bool isWhite = true;
 
         public static Board Board { get; set; } = new Board(LaunchState.FullStart);
 
@@ -76,9 +76,15 @@ namespace Chess.Controllers
                                 break;
                         }
 
-                        Board.DisplayBoard();
-
                         isWhite = !isWhite;
+                    }
+                    else if (Board.gameSpace[piece[0], piece[1]].GetSymbol().Equals('-'))
+                    {
+                        Console.WriteLine("There is no piece at that location to move");
+                    }
+                    else
+                    {
+                        Console.WriteLine("You cannot move the opponents pieces");
                     }
 
                     break;
@@ -101,6 +107,14 @@ namespace Chess.Controllers
                         }
 
                     }
+                    else if (Board.gameSpace[piece1[0], piece1[1]].GetSymbol().Equals('-'))
+                    {
+                        Console.WriteLine("There is no piece at that location to move");
+                    }
+                    else
+                    {
+                        Console.WriteLine("You cannot move the opponents pieces");
+                    }
 
                     int[] piece2 = ConvertToXY(move.Substring(6, 2));
 
@@ -109,19 +123,28 @@ namespace Chess.Controllers
 
                         if (Board.gameSpace[piece2[0], piece2[2]].Move(move.Substring(9)) == 0)
                         {
+                            Console.WriteLine("---------------");
                             Board.DisplayBoard();
 
                             isWhite = !isWhite;
                         }
 
                     }
+                    else if (Board.gameSpace[piece2[0], piece2[1]].GetSymbol().Equals('-') && lastValid)
+                    {
+                        Console.WriteLine("There is no piece at that location to move");
+                    }
+                    else if (lastValid)
+                    {
+                        Console.WriteLine("You cannot move the opponents pieces");
+                    }
 
                     break;
 
                 case 0:
 
-                    //Console.WriteLine("---------------");
-                    //Console.WriteLine($"Move {iter} is an invalid move");
+                    Console.WriteLine("---------------");
+                    Console.WriteLine($"Invalid move");
 
                     break;
 
