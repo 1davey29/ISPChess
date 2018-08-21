@@ -13,8 +13,9 @@ namespace Chess.Controllers
     public static class ChessController
     {
         private static string filePath;
+        private static bool isWhite;
 
-        public static Board Board { get; set; } = new Board(LaunchState.NoPawns);
+        public static Board Board { get; set; } = new Board(LaunchState.FullStart);
 
         public static void Run()
         {
