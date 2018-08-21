@@ -13,8 +13,9 @@ namespace Chess.Controllers
     public static class ChessController
     {
         private static string filePath;
+        private static bool isWhite = true;
 
-        public static Board Board { get; set; } = new Board(LaunchState.NoPawns);
+        public static Board Board { get; set; } = new Board(LaunchState.FullStart);
 
         public static void Run()
         {
@@ -25,23 +26,33 @@ namespace Chess.Controllers
             SetMoveFilePath(Console.ReadLine());
 
             List<String> moves = LoadMoveFile();
-            int iter = 1;
 
             foreach (String move in moves)
             {
-                int type = RecognizeMoveType(move);
 
-                switch (type)
-                {
-                    case 1:
+                TakeTurn(move);
 
-                        //PlacePiece(move);
+            }
+        }
 
-                        break;
+        public static void TakeTurn(String move)
+        {
+            int type = RecognizeMoveType(move);
 
-                    case 2:
+            switch (type)
+            {
+                case 1:
 
-                        int[] piece = ConvertToXY(move.Substring(0,2));
+                    //PlacePiece(move);
+
+                    break;
+
+                case 2:
+
+                    int[] piece = ConvertToXY(move.Substring(0, 2));
+
+                    if (isWhite == Char.IsLower(Board.gameSpace[piece[0], piece[1]].GetSymbol()))
+                    {
 
                         int movementResult = Board.gameSpace[piece[0], piece[1]].Move(move.Substring(3));
 
@@ -65,40 +76,83 @@ namespace Chess.Controllers
                                 break;
                         }
 
-                        break;
+                        isWhite = !isWhite;
+                    }
+                    else if (Board.gameSpace[piece[0], piece[1]].GetSymbol().Equals('-'))
+                    {
+                        Console.WriteLine("There is no piece at that location to move");
+                    }
+                    else
+                    {
+                        Console.WriteLine("You cannot move the opponents pieces");
+                    }
 
-                    case 3:
+                    break;
 
-                        int[] piece1 = ConvertToXY(move.Substring(0, 2));
+                case 3:
+
+                    bool lastValid = false;
+                    int[] piece1 = ConvertToXY(move.Substring(0, 2));
+
+                    if (isWhite == Char.IsLower(Board.gameSpace[piece1[0], piece1[1]].GetSymbol()))
+                    {
 
                         if (Board.gameSpace[piece1[0], piece1[1]].Move(move.Substring(3, 2)) == 0)
                         {
-                            Board.DisplayBoard();
+                            lastValid = true;
+                        }
+                        else
+                        {
+                            lastValid = false;
                         }
 
-                        int[] piece2 = ConvertToXY(move.Substring(6, 2));
+                    }
+                    else if (Board.gameSpace[piece1[0], piece1[1]].GetSymbol().Equals('-'))
+                    {
+                        Console.WriteLine("There is no piece at that location to move");
+                    }
+                    else
+                    {
+                        Console.WriteLine("You cannot move the opponents pieces");
+                    }
+
+                    int[] piece2 = ConvertToXY(move.Substring(6, 2));
+
+                    if (isWhite == Char.IsLower(Board.gameSpace[piece2[0], piece2[1]].GetSymbol()) && lastValid)
+                    {
 
                         if (Board.gameSpace[piece2[0], piece2[2]].Move(move.Substring(9)) == 0)
                         {
+                            Console.WriteLine("---------------");
                             Board.DisplayBoard();
+
+                            isWhite = !isWhite;
                         }
 
-                        break;
+                    }
+                    else if (Board.gameSpace[piece2[0], piece2[1]].GetSymbol().Equals('-') && lastValid)
+                    {
+                        Console.WriteLine("There is no piece at that location to move");
+                    }
+                    else if (lastValid)
+                    {
+                        Console.WriteLine("You cannot move the opponents pieces");
+                    }
 
-                    case 0:
+                    break;
 
-                        Console.WriteLine("---------------");
-                        Console.WriteLine($"Move {iter} is an invalid move");
+                case 0:
 
-                        break;
+                    Console.WriteLine("---------------");
+                    Console.WriteLine($"Invalid move");
 
-                    default:
+                    break;
 
-                        Console.WriteLine("Error in code");
+                default:
 
-                        break;
-                }
-                iter++;
+                    Console.WriteLine("Error in code");
+
+                    break;
             }
         }
 

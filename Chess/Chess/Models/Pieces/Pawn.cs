@@ -24,9 +24,9 @@ namespace Chess.Models.Pieces
                 return 4;
             }
 
-            if ((distanceY == 0 && (hasMoved) ? distanceX > 1 : distanceX > 2))
+            if (distanceX != 0 || ((hasMoved) ? distanceY > 1 : distanceY > 2))
             {
-                if (distanceX != 1 && distanceY != 1)
+                if (distanceX != 1 || distanceY != 1)
                 {
                     return 1;
                 }
@@ -40,9 +40,6 @@ namespace Chess.Models.Pieces
                     {
                         return 2;
                     }
-
-                    UpdateBoard(positionXY);
-
                 }
                 else
                 {
@@ -78,14 +75,9 @@ namespace Chess.Models.Pieces
                     else
                         y--;
                 }
-            } 
+            }
 
-
-            ChessController.Board.gameSpace[positionXY[0], positionXY[1]] = this;
-            ChessController.Board.gameSpace[XPosition, YPosition] = new EmptyPiece(XPosition, YPosition);
-
-            XPosition = positionXY[0];
-            YPosition = positionXY[1];
+            UpdateBoard(positionXY);
 
             hasMoved = true;
 
