@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Chess.Enums;
 using Chess.Models;
 using Chess.Models.Pieces;
 
@@ -12,11 +12,14 @@ namespace Chess.Controllers
 {
     public static class ChessController
     {
-        private static Board board = new Board();
         private static string filePath;
+
+        public static Board Board { get; set; } = new Board(LaunchState.NoPawns);
 
         public static void Run()
         {
+            Board.DisplayBoard();
+
             Console.Write("Please enter the file path of your move file: ");
 
             SetMoveFilePath(Console.ReadLine());
@@ -32,24 +35,59 @@ namespace Chess.Controllers
                 {
                     case 1:
 
-                        PlacePiece(move);
+                        //PlacePiece(move);
 
                         break;
 
                     case 2:
 
-                        MovePiece(move);
+                        int[] piece = ConvertToXY(move.Substring(0,2));
+
+                        int movementResult = Board.gameSpace[piece[0], piece[1]].Move(move.Substring(3));
+
+                        switch (movementResult)
+                        {
+                            case 0:
+                                Console.WriteLine("---------------");
+                                Board.DisplayBoard();
+                                break;
+                            case 1:
+                                Console.WriteLine($"Invalid movement for a {Board.gameSpace[piece[0], piece[1]].GetType().Name}!");
+                                break;
+                            case 2:
+                                Console.WriteLine("You cannot move through your own pieces!");
+                                break;
+                            case 3:
+                                Console.WriteLine("You cannot move through enemy pieces!");
+                                break;
+                            case 4:
+                                Console.WriteLine("Invalid movement, out of bounds!");
+                                break;
+                        }
 
                         break;
 
                     case 3:
 
-                        MoveTwoPieces(move);
+                        int[] piece1 = ConvertToXY(move.Substring(0, 2));
+
+                        if (Board.gameSpace[piece1[0], piece1[1]].Move(move.Substring(3, 2)) == 0)
+                        {
+                            Board.DisplayBoard();
+                        }
+
+                        int[] piece2 = ConvertToXY(move.Substring(6, 2));
+
+                        if (Board.gameSpace[piece2[0], piece2[2]].Move(move.Substring(9)) == 0)
+                        {
+                            Board.DisplayBoard();
+                        }
 
                         break;
 
                     case 0:
 
+                        Console.WriteLine("---------------");
                         Console.WriteLine($"Move {iter} is an invalid move");
 
                         break;
@@ -62,8 +100,6 @@ namespace Chess.Controllers
                 }
                 iter++;
             }
-
-            board.DisplayBoard();
         }
 
         public static void SetMoveFilePath(string loadPath)
@@ -130,53 +166,53 @@ namespace Chess.Controllers
                 return 1;
 
             String square = move.Substring(2);
-            Int32 x;
+            Int32 y;
 
-            if (!Int32.TryParse(square.Substring(1), out x))
+            if (!Int32.TryParse(square.Substring(1), out y))
                 return 1;
 
-            x = 8 - x;
+            y = 8 - y;
 
-            Int32 y = (Convert.ToInt32(Convert.ToChar(square.Substring(0, 1).ToUpper()) - 65));
+            Int32 x = (Convert.ToInt32(Convert.ToChar(square.Substring(0, 1).ToUpper()) - 65));
 
-            if (board.gameSpace[x, y] is EmptyPiece)
+            if (Board.gameSpace[x, y] is EmptyPiece)
             {
 
                 switch (pieceAcronym.Substring(0, 1))
                 {
                     case "K":
 
-                        board.gameSpace[x, y] = new King(color);
+                        Board.gameSpace[x, y] = new King(color, x, y);
 
                         break;
 
                     case "Q":
 
-                        board.gameSpace[x, y] = new Queen(color);
+                        Board.gameSpace[x, y] = new Queen(color, x, y);
 
                         break;
 
                     case "B":
 
-                        board.gameSpace[x, y] = new Bishop(color);
+                        Board.gameSpace[x, y] = new Bishop(color, x, y);
 
                         break;
 
                     case "N":
 
-                        board.gameSpace[x, y] = new Knight(color);
+                        Board.gameSpace[x, y] = new Knight(color, x, y);
 
                         break;
 
                     case "R":
 
-                        board.gameSpace[x, y] = new Rook(color);
+                        Board.gameSpace[x, y] = new Rook(color, x, y);
 
                         break;
 
                     case "P":
 
-                        board.gameSpace[x, y] = new Pawn(color);
+                        Board.gameSpace[x, y] = new Pawn(color, x, y);
 
                         break;
 
@@ -196,41 +232,18 @@ namespace Chess.Controllers
             }
         }
 
-        private static int MovePiece(String move)
+        public static int[] ConvertToXY(string position)
         {
-            String square1 = move.Substring(0, 2);
-            int x1;
+            Int32 y;
 
-            if (!int.TryParse(square1.Substring(1), out x1))
-                return 1;
+            Int32.TryParse(position.Substring(1), out y);
 
-            x1 = 8 - x1;
+            y = 8 - y;
 
-            int y1 = Convert.ToInt32(Convert.ToChar(square1.Substring(0, 1).ToUpper()) - 65);
+            Int32 x = (Convert.ToInt32(Convert.ToChar(position.Substring(0, 1).ToUpper()) - 65));
 
-            String square2 = move.Substring(3);
-            int x2;
-
-            if (!int.TryParse(square2.Substring(1), out x2))
-                return 1;
-
-            x2 = 8 - x2;
-
-            int y2 = Convert.ToInt32(Convert.ToChar(square2.Substring(0, 1).ToUpper()) - 65);
-
-            board.gameSpace[x2, y2] = board.gameSpace[x1, y1];
-            board.gameSpace[x1, y1] = new EmptyPiece();
-
-            return 0;
-        }
-
-        private static int MoveTwoPieces(String move)
-        {
-            MovePiece(move.Substring(0, 5));
-
-            MovePiece(move.Substring(6));
-
-            return 0;
+            int[] positionXY = { x, y };
+            return positionXY;
         }
     }
 }
