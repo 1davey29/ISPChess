@@ -201,7 +201,7 @@ namespace Chess.Models
             int[] kingPositionXY = new int[2];
             foreach (Piece p in gameSpace)
             {
-                if (p.GetType() is King && (isWhite ? Char.IsLower(p.GetSymbol()) : Char.IsUpper(p.GetSymbol())))
+                if (p is King && (isWhite ? Char.IsLower(p.GetSymbol()) : Char.IsUpper(p.GetSymbol())))
                 {
                     kingPositionXY[0] = p.XPosition;
                     kingPositionXY[1] = p.YPosition;
