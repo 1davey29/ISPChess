@@ -73,6 +73,11 @@ namespace Chess.Models.Pieces
 
                             if (!((x == positionXY[0]) && (y == positionXY[1])))
                             {
+                                if (ChessController.Board.gameSpace[x, y].GetType() == typeof(King))
+                                {
+                                    return 5;
+                                }
+
                                 return 3;
                             }
                         }

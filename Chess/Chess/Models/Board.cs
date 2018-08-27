@@ -209,5 +209,15 @@ namespace Chess.Models
             }
             return kingPositionXY;
         }
+
+        public bool IsKingInCheck(bool isKingWhite)
+        {
+            foreach (Piece p in gameSpace)
+            {
+
+            }
+
+            return false;
+        }
     }
 }
