@@ -57,6 +57,48 @@ namespace Chess.Models.Pieces
             return 0;
         }
 
+        public override int Move(int[] positionXY)
+        {
+            int distanceX = Math.Abs(XPosition - positionXY[0]);
+            int distanceY = Math.Abs(YPosition - positionXY[1]);
+
+            if ((positionXY[0] < 0 || positionXY[0] > 7) || (positionXY[1] < 0 || positionXY[1] > 7))
+            {
+                return 4;
+            }
+
+            if (distanceX != 0 && distanceY != 0)
+            {
+                return 1;
+            }
+
+            int valid;
+
+            if (distanceX == 0 && distanceY != 0)
+            {
+                valid = ValidRookMove(distanceY, positionXY[1], false, this, false);
+            }
+            else if (distanceY == 0 && distanceX != 0)
+            {
+                valid = ValidRookMove(distanceX, positionXY[0], true, this, false);
+            }
+            else
+            {
+                throw new Exception("Error in code, unreachable state");
+            }
+
+            if (valid != 0)
+            {
+                return valid;
+            }
+
+            UpdateBoard(positionXY);
+
+            hasMoved = true;
+
+            return 0;
+        }
+
         public static int ValidRookMove(int absDist, int changedPos, bool isX, Object obj, bool isQueen)
         {
             Piece piece;

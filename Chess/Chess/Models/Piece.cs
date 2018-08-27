@@ -16,7 +16,7 @@ namespace Chess.Models
         protected readonly Char symbol;
 
         public abstract int Move(String newPosition);
-        public abstract int Move(int[] newPosition);
+        public abstract int Move(int[] positionXY);
 
         public Char GetSymbol()
         {
