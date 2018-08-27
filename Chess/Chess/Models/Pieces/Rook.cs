@@ -92,7 +92,7 @@ namespace Chess.Models.Pieces
                                 if (Char.IsUpper(ChessController.Board.gameSpace[changedPos - i, piece.YPosition].GetSymbol()) ^ Char.IsUpper(piece.GetSymbol()))
                                 {
                                     //Change later, king check
-                                    return 3;
+                                    return 5;
                                 }
                                 else
                                 {

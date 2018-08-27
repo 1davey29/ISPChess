@@ -69,6 +69,7 @@ namespace Chess.Controllers
                                 Console.WriteLine("You cannot move through your own pieces!");
                                 break;
                             case 3:
+                            case 5:
                                 Console.WriteLine("You cannot move through enemy pieces!");
                                 break;
                             case 4:
