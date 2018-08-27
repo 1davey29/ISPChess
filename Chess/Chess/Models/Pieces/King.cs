@@ -37,7 +37,10 @@ namespace Chess.Models.Pieces
                     return 2;
                 }
 
-
+                if (ChessController.Board.gameSpace[positionXY[0], positionXY[1]].GetType() == typeof(King))
+                {
+                    return 5;
+                }
             }
             UpdateBoard(positionXY);
 
