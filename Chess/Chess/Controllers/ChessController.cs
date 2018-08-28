@@ -243,7 +243,7 @@ namespace Chess.Controllers
             if (Board.gameSpace[x, y] is EmptyPiece)
             {
 
-                switch (pieceAcronym.Substring(0, 1))
+                switch (pieceAcronym.Substring(0, 1).ToUpper())
                 {
                     case "K":
 
