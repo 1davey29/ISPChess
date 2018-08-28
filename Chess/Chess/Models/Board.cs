@@ -255,7 +255,7 @@ namespace Chess.Models
 
                 for (int i = -1; i < 2; i++)
                 {
-                    for (int j = -1; j < 0; j++)
+                    for (int j = -1; j < 2; j++)
                     {
                         int x = kingPos[0] + i;
                         int y = kingPos[1] + j;
