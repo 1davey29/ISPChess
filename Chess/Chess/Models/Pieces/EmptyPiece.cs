@@ -13,6 +13,11 @@ namespace Chess.Models.Pieces
             return 0;
         }
 
+        public override int Move(int[] positionXY)
+        {
+            return 0;
+        }
+
         public EmptyPiece(int xPosition, int yPosition) : base('-', xPosition, yPosition)
         {
         }

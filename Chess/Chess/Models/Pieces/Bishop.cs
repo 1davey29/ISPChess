@@ -37,6 +37,30 @@ namespace Chess.Models.Pieces
             return validationReturn;
         }
 
+        public override int Move(int[] positionXY)
+        {
+            int distanceX = Math.Abs(XPosition - positionXY[0]);
+            int distanceY = Math.Abs(YPosition - positionXY[1]);
+
+            if ((positionXY[0] < 0 || positionXY[0] > 7) || (positionXY[1] < 0 || positionXY[1] > 7))
+            {
+                return 4;
+            }
+
+            if (distanceX != distanceY)
+            {
+                return 1;
+            }
+
+            int validationReturn = PieceInWay(this, positionXY, distanceX, distanceY, false);
+            if (validationReturn == 0)
+            {
+                UpdateBoard(positionXY);
+            }
+
+            return validationReturn;
+        }
+
         public static int PieceInWay(Object obj, int[] positionXY, int distanceX, int distanceY, bool isQueen)
         {
             Piece piece;
@@ -73,6 +97,11 @@ namespace Chess.Models.Pieces
 
                             if (!((x == positionXY[0]) && (y == positionXY[1])))
                             {
+                                if (ChessController.Board.gameSpace[x, y].GetType() == typeof(King))
+                                {
+                                    return 5;
+                                }
+
                                 return 3;
                             }
                         }

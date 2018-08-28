@@ -15,7 +15,7 @@ namespace Chess.Controllers
         private static string filePath;
         private static bool isWhite = true;
 
-        public static Board Board { get; set; } = new Board(LaunchState.FullStart);
+        public static Board Board { get; set; } = new Board(LaunchState.Empty);
 
         public static void Run()
         {
@@ -29,9 +29,27 @@ namespace Chess.Controllers
 
             foreach (String move in moves)
             {
-
                 TakeTurn(move);
+            }
 
+            Board.DisplayBoard();
+
+            if (Board.IsKingInCheck(true))
+            {
+                Console.WriteLine("White King is in check!");
+            }
+            else
+            {
+                Console.WriteLine("White King is not in check!");
+            }
+
+            if (Board.IsKingInCheck(false))
+            {
+                Console.WriteLine("Black King is in check!");
+            }
+            else
+            {
+                Console.WriteLine("Black King is not in check!");
             }
         }
 
@@ -43,108 +61,109 @@ namespace Chess.Controllers
             {
                 case 1:
 
-                    //PlacePiece(move);
+                    PlacePiece(move);
 
                     break;
 
                 case 2:
 
-                    int[] piece = ConvertToXY(move.Substring(0, 2));
+                    //int[] piece = ConvertToXY(move.Substring(0, 2));
 
-                    if (isWhite == Char.IsLower(Board.gameSpace[piece[0], piece[1]].GetSymbol()))
-                    {
+                    //if (isWhite == Char.IsLower(Board.gameSpace[piece[0], piece[1]].GetSymbol()))
+                    //{
 
-                        int movementResult = Board.gameSpace[piece[0], piece[1]].Move(move.Substring(3));
+                    //    int movementResult = Board.gameSpace[piece[0], piece[1]].Move(move.Substring(3));
 
-                        switch (movementResult)
-                        {
-                            case 0:
-                                Console.WriteLine("---------------");
-                                Board.DisplayBoard();
-                                break;
-                            case 1:
-                                Console.WriteLine($"Invalid movement for a {Board.gameSpace[piece[0], piece[1]].GetType().Name}!");
-                                break;
-                            case 2:
-                                Console.WriteLine("You cannot move through your own pieces!");
-                                break;
-                            case 3:
-                                Console.WriteLine("You cannot move through enemy pieces!");
-                                break;
-                            case 4:
-                                Console.WriteLine("Invalid movement, out of bounds!");
-                                break;
-                        }
+                    //    switch (movementResult)
+                    //    {
+                    //        case 0:
+                    //            Console.WriteLine("---------------");
+                    //            Board.DisplayBoard();
+                    //            break;
+                    //        case 1:
+                    //            Console.WriteLine($"Invalid movement for a {Board.gameSpace[piece[0], piece[1]].GetType().Name}!");
+                    //            break;
+                    //        case 2:
+                    //            Console.WriteLine("You cannot move through your own pieces!");
+                    //            break;
+                    //        case 3:
+                    //        case 5:
+                    //            Console.WriteLine("You cannot move through enemy pieces!");
+                    //            break;
+                    //        case 4:
+                    //            Console.WriteLine("Invalid movement, out of bounds!");
+                    //            break;
+                    //    }
 
-                        isWhite = !isWhite;
-                    }
-                    else if (Board.gameSpace[piece[0], piece[1]].GetSymbol().Equals('-'))
-                    {
-                        Console.WriteLine("There is no piece at that location to move");
-                    }
-                    else
-                    {
-                        Console.WriteLine("You cannot move the opponents pieces");
-                    }
+                    //    isWhite = !isWhite;
+                    //}
+                    //else if (Board.gameSpace[piece[0], piece[1]].GetSymbol().Equals('-'))
+                    //{
+                    //    Console.WriteLine("There is no piece at that location to move");
+                    //}
+                    //else
+                    //{
+                    //    Console.WriteLine("You cannot move the opponents pieces");
+                    //}
 
                     break;
 
                 case 3:
 
-                    bool lastValid = false;
-                    int[] piece1 = ConvertToXY(move.Substring(0, 2));
+                    //bool lastValid = false;
+                    //int[] piece1 = ConvertToXY(move.Substring(0, 2));
 
-                    if (isWhite == Char.IsLower(Board.gameSpace[piece1[0], piece1[1]].GetSymbol()))
-                    {
+                    //if (isWhite == Char.IsLower(Board.gameSpace[piece1[0], piece1[1]].GetSymbol()))
+                    //{
 
-                        if (Board.gameSpace[piece1[0], piece1[1]].Move(move.Substring(3, 2)) == 0)
-                        {
-                            lastValid = true;
-                        }
-                        else
-                        {
-                            lastValid = false;
-                        }
+                    //    if (Board.gameSpace[piece1[0], piece1[1]].Move(move.Substring(3, 2)) == 0)
+                    //    {
+                    //        lastValid = true;
+                    //    }
+                    //    else
+                    //    {
+                    //        lastValid = false;
+                    //    }
 
-                    }
-                    else if (Board.gameSpace[piece1[0], piece1[1]].GetSymbol().Equals('-'))
-                    {
-                        Console.WriteLine("There is no piece at that location to move");
-                    }
-                    else
-                    {
-                        Console.WriteLine("You cannot move the opponents pieces");
-                    }
+                    //}
+                    //else if (Board.gameSpace[piece1[0], piece1[1]].GetSymbol().Equals('-'))
+                    //{
+                    //    Console.WriteLine("There is no piece at that location to move");
+                    //}
+                    //else
+                    //{
+                    //    Console.WriteLine("You cannot move the opponents pieces");
+                    //}
 
-                    int[] piece2 = ConvertToXY(move.Substring(6, 2));
+                    //int[] piece2 = ConvertToXY(move.Substring(6, 2));
 
-                    if (isWhite == Char.IsLower(Board.gameSpace[piece2[0], piece2[1]].GetSymbol()) && lastValid)
-                    {
+                    //if (isWhite == Char.IsLower(Board.gameSpace[piece2[0], piece2[1]].GetSymbol()) && lastValid)
+                    //{
 
-                        if (Board.gameSpace[piece2[0], piece2[2]].Move(move.Substring(9)) == 0)
-                        {
-                            Console.WriteLine("---------------");
-                            Board.DisplayBoard();
+                    //    if (Board.gameSpace[piece2[0], piece2[2]].Move(move.Substring(9)) == 0)
+                    //    {
+                    //        Console.WriteLine("---------------");
+                    //        Board.DisplayBoard();
 
-                            isWhite = !isWhite;
-                        }
+                    //        isWhite = !isWhite;
+                    //    }
 
-                    }
-                    else if (Board.gameSpace[piece2[0], piece2[1]].GetSymbol().Equals('-') && lastValid)
-                    {
-                        Console.WriteLine("There is no piece at that location to move");
-                    }
-                    else if (lastValid)
-                    {
-                        Console.WriteLine("You cannot move the opponents pieces");
-                    }
+                    //}
+                    //else if (Board.gameSpace[piece2[0], piece2[1]].GetSymbol().Equals('-') && lastValid)
+                    //{
+                    //    Console.WriteLine("There is no piece at that location to move");
+                    //}
+                    //else if (lastValid)
+                    //{
+                    //    Console.WriteLine("You cannot move the opponents pieces");
+                    //}
 
                     break;
 
                 case 0:
 
-                    Console.WriteLine("---------------");
-                    Console.WriteLine($"Invalid move");
+                    //Console.WriteLine("---------------");
+                    //Console.WriteLine($"Invalid move");
 
                     break;
 
@@ -232,7 +251,7 @@ namespace Chess.Controllers
             if (Board.gameSpace[x, y] is EmptyPiece)
             {
 
-                switch (pieceAcronym.Substring(0, 1))
+                switch (pieceAcronym.Substring(0, 1).ToUpper())
                 {
                     case "K":
 

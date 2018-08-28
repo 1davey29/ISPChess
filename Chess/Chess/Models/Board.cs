@@ -195,5 +195,35 @@ namespace Chess.Models
                 Console.WriteLine();
             }
         }
+
+        public int[] LocateKing(bool isWhite)
+        {
+            int[] kingPositionXY = new int[2];
+            foreach (Piece p in gameSpace)
+            {
+                if (p is King && (isWhite ? Char.IsLower(p.GetSymbol()) : Char.IsUpper(p.GetSymbol())))
+                {
+                    kingPositionXY[0] = p.XPosition;
+                    kingPositionXY[1] = p.YPosition;
+                }
+            }
+            return kingPositionXY;
+        }
+
+        public bool IsKingInCheck(bool isKingWhite)
+        {
+            foreach (Piece p in gameSpace)
+            {
+                if (char.IsLower(p.GetSymbol()) ^ isKingWhite)
+                {
+                    if (p.Move(LocateKing(isKingWhite)) == 5)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
     }
 }
