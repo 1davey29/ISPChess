@@ -292,7 +292,7 @@ namespace Chess.Models
                     }
                 }
             }
-            return false;
+            return true;
         }
     }
 }
