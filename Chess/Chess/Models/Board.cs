@@ -214,7 +214,13 @@ namespace Chess.Models
         {
             foreach (Piece p in gameSpace)
             {
-
+                if (char.IsLower(p.GetSymbol()) ^ isKingWhite)
+                {
+                    if (p.Move(LocateKing(isKingWhite)) == 5)
+                    {
+                        return true;
+                    }
+                }
             }
 
             return false;
