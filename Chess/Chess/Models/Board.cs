@@ -210,15 +210,71 @@ namespace Chess.Models
             return kingPositionXY;
         }
 
-        public bool IsKingInCheck(bool isKingWhite)
+        public int[] IsKingInCheck(bool isKingWhite, int[] pos)
         {
+            int[] kingInCheckArray = new int[4];
+            kingInCheckArray[2] = 0;
+            int count = 0;
+
             foreach (Piece p in gameSpace)
             {
                 if (char.IsLower(p.GetSymbol()) ^ isKingWhite)
                 {
-                    if (p.Move(LocateKing(isKingWhite)) == 5)
+                    if (p.Move(pos) == 5)
                     {
-                        return true;
+                        kingInCheckArray[2] = 1;
+                        kingInCheckArray[0] = p.XPosition;
+                        kingInCheckArray[1] = p.YPosition;
+                        count++;
+                    }
+                }
+            }
+
+            kingInCheckArray[3] = count;
+
+            return kingInCheckArray;
+        }
+
+        public int[] IsKingInCheck(bool isKingWhite)
+        {
+            return IsKingInCheck(isKingWhite, LocateKing(isKingWhite));
+        }
+
+        public bool IsKingInCheckmate(bool isKingWhite)
+        {
+            int[] kingInCheckArray = IsKingInCheck(isKingWhite);
+
+            if (kingInCheckArray[2] == 1)
+            {
+                int[] kingPos = LocateKing(isKingWhite);
+
+                for (int i = -1; i < 2; i++)
+                {
+                    for (int j = -1; j < 0; j++)
+                    {
+                        if (IsKingInCheck(isKingWhite, new int[2] { kingPos[0] + i, kingPos[1] + j })[3] == 0)
+                        {
+                            if (gameSpace[kingPos[0] + i, kingPos[1] + j] is EmptyPiece || (char.IsLower(gameSpace[kingPos[0] + i, kingPos[1] + j].GetSymbol()) ^ isKingWhite))
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+
+                if (kingInCheckArray[3] > 1)
+                {
+                    return true;
+                }
+
+                foreach (Piece p in gameSpace)
+                {
+                    if (char.IsLower(p.GetSymbol()) ^ isKingWhite)
+                    {
+                        if (p.Move(new int[2] { kingInCheckArray[0], kingInCheckArray[1] }) == 0)
+                        {
+                            return true;
+                        }
                     }
                 }
             }
