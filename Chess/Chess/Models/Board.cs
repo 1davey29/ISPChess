@@ -280,16 +280,18 @@ namespace Chess.Models
 
                 foreach (Piece p in gameSpace)
                 {
-                    if (char.IsLower(p.GetSymbol()) ^ isKingWhite)
+                    if (!(p is EmptyPiece))
                     {
-                        if (p.Move(new int[2] { kingInCheckArray[0], kingInCheckArray[1] }) == 0)
+                        if (char.IsUpper(p.GetSymbol()) ^ isKingWhite)
                         {
-                            return true;
+                            if (p.Move(new int[2] { kingInCheckArray[0], kingInCheckArray[1] }) == 0)
+                            {
+                                return false;
+                            }
                         }
                     }
                 }
             }
-
             return false;
         }
     }
