@@ -38,10 +38,18 @@ namespace Chess.Controllers
             {
                 Console.WriteLine("White King is in check!");
             }
+            else
+            {
+                Console.WriteLine("White King is not in check!");
+            }
 
             if (Board.IsKingInCheck(false))
             {
                 Console.WriteLine("Black King is in check!");
+            }
+            else
+            {
+                Console.WriteLine("Black King is not in check!");
             }
         }
 
