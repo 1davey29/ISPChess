@@ -15,7 +15,7 @@ namespace Chess.Controllers
         private static string filePath;
         private static bool isWhite = true;
 
-        public static Board Board { get; set; } = new Board(LaunchState.FullStart);
+        public static Board Board { get; set; } = new Board(LaunchState.Empty);
 
         public static void Run()
         {
@@ -31,6 +31,8 @@ namespace Chess.Controllers
             {
                 TakeTurn(move);
             }
+
+            Board.DisplayBoard();
 
             if (Board.IsKingInCheck(true))
             {
