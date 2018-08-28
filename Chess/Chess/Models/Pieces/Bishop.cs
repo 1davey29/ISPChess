@@ -73,16 +73,21 @@ namespace Chess.Models.Pieces
                 piece = obj as Bishop;
             }
 
+            if (distanceX == 0 && distanceY == 0)
+            {
+                return 6;
+            }
+
             bool IsXPositive = (piece.XPosition - positionXY[0] > 0);
             bool IsYPositive = (piece.YPosition - positionXY[1] > 0);
 
             int xIter = 0;
             int yIter = 0;
-            for (int x = piece.XPosition; (IsXPositive) ? x > positionXY[0] : x < positionXY[0];)
+            for (int x = piece.XPosition; (IsXPositive) ? x >= positionXY[0] : x <= positionXY[0];)
             {
                 xIter++;
                 yIter = 0;
-                for (int y = piece.YPosition; (IsYPositive) ? y > positionXY[1] : y < positionXY[1];)
+                for (int y = piece.YPosition; (IsYPositive) ? y >= positionXY[1] : y <= positionXY[1];)
                 {
                     yIter++;
                     if (xIter != 1 && (xIter == yIter))
@@ -95,12 +100,13 @@ namespace Chess.Models.Pieces
                                 return 2;
                             }
 
+                            if (ChessController.Board.gameSpace[x, y].GetType() == typeof(King))
+                            {
+                                return 5;
+                            }
+
                             if (!((x == positionXY[0]) && (y == positionXY[1])))
                             {
-                                if (ChessController.Board.gameSpace[x, y].GetType() == typeof(King))
-                                {
-                                    return 5;
-                                }
 
                                 return 3;
                             }

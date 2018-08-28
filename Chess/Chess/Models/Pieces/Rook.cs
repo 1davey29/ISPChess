@@ -82,6 +82,10 @@ namespace Chess.Models.Pieces
             {
                 valid = ValidRookMove(distanceX, positionXY[0], true, this, false);
             }
+            else if (distanceX == 0 && distanceY == 0)
+            {
+                return 6;
+            }
             else
             {
                 throw new Exception("Error in code, unreachable state");
@@ -181,7 +185,7 @@ namespace Chess.Models.Pieces
 
                                 if (Char.IsUpper(ChessController.Board.gameSpace[changedPos + i, piece.YPosition].GetSymbol()) ^ Char.IsUpper(piece.GetSymbol()))
                                 {
-                                    return 3;
+                                    return 5;
                                 }
                                 else
                                 {
@@ -232,7 +236,7 @@ namespace Chess.Models.Pieces
 
                                 if (Char.IsUpper(ChessController.Board.gameSpace[piece.XPosition, changedPos - i].GetSymbol()) ^ Char.IsUpper(piece.GetSymbol()))
                                 {
-                                    return 3;
+                                    return 5;
                                 }
                                 else
                                 {
@@ -279,7 +283,7 @@ namespace Chess.Models.Pieces
 
                                 if (Char.IsUpper(ChessController.Board.gameSpace[piece.XPosition, changedPos + i].GetSymbol()) ^ Char.IsUpper(piece.GetSymbol()))
                                 {
-                                    return 3;
+                                    return 5;
                                 }
                                 else
                                 {

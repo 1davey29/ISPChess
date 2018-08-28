@@ -34,18 +34,32 @@ namespace Chess.Controllers
 
             Board.DisplayBoard();
 
-            if (Board.IsKingInCheck(true))
+            if (Board.IsKingInCheck(true)[2] == 1)
             {
-                Console.WriteLine("White King is in check!");
+                if (Board.IsKingInCheckmate(true))
+                {
+                    Console.WriteLine("White King is in checkmate!");
+                }
+                else
+                {
+                    Console.WriteLine("White King is in check!");
+                }
             }
             else
             {
                 Console.WriteLine("White King is not in check!");
             }
 
-            if (Board.IsKingInCheck(false))
+            if (Board.IsKingInCheck(false)[2] == 1)
             {
-                Console.WriteLine("Black King is in check!");
+                if (Board.IsKingInCheckmate(false))
+                {
+                    Console.WriteLine("Black King is in checkmate!");
+                }
+                else
+                {
+                    Console.WriteLine("Black King is in check!");
+                }
             }
             else
             {

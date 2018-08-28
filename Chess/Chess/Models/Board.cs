@@ -227,6 +227,11 @@ namespace Chess.Models
                         kingInCheckArray[1] = p.YPosition;
                         count++;
                     }
+
+                    if (p.Move(pos) == 6)
+                    {
+                        count = 1;
+                    }
                 }
             }
 
@@ -250,13 +255,19 @@ namespace Chess.Models
 
                 for (int i = -1; i < 2; i++)
                 {
-                    for (int j = -1; j < 0; j++)
+                    for (int j = -1; j < 2; j++)
                     {
-                        if (IsKingInCheck(isKingWhite, new int[2] { kingPos[0] + i, kingPos[1] + j })[3] == 0)
+                        int x = kingPos[0] + i;
+                        int y = kingPos[1] + j;
+
+                        if (x > -1 && x < 8 && y > -1 && y < 8)
                         {
-                            if (gameSpace[kingPos[0] + i, kingPos[1] + j] is EmptyPiece || (char.IsLower(gameSpace[kingPos[0] + i, kingPos[1] + j].GetSymbol()) ^ isKingWhite))
+                            if (IsKingInCheck(isKingWhite, new int[2] { x, y })[3] == 0)
                             {
-                                return false;
+                                if (gameSpace[x, y] is EmptyPiece || (char.IsLower(gameSpace[x, y].GetSymbol()) ^ isKingWhite))
+                                {
+                                    return false;
+                                }
                             }
                         }
                     }
@@ -269,17 +280,19 @@ namespace Chess.Models
 
                 foreach (Piece p in gameSpace)
                 {
-                    if (char.IsLower(p.GetSymbol()) ^ isKingWhite)
+                    if (!(p is EmptyPiece))
                     {
-                        if (p.Move(new int[2] { kingInCheckArray[0], kingInCheckArray[1] }) == 0)
+                        if (char.IsUpper(p.GetSymbol()) ^ isKingWhite)
                         {
-                            return true;
+                            if (p.Move(new int[2] { kingInCheckArray[0], kingInCheckArray[1] }) == 0)
+                            {
+                                return false;
+                            }
                         }
                     }
                 }
             }
-
-            return false;
+            return true;
         }
     }
 }

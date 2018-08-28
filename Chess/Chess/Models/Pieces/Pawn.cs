@@ -19,6 +19,11 @@ namespace Chess.Models.Pieces
             int distanceX = Math.Abs(XPosition - positionXY[0]);
             int distanceY = Math.Abs(YPosition - positionXY[1]);
 
+            if (distanceX == 0 && distanceY == 0)
+            {
+                return 6;
+            }
+
             if ((positionXY[0] < 0 || positionXY[0] > 7) || (positionXY[1] < 0 || positionXY[1] > 7))
             {
                 return 4;
@@ -92,6 +97,11 @@ namespace Chess.Models.Pieces
         {
             int distanceX = Math.Abs(XPosition - positionXY[0]);
             int distanceY = Math.Abs(YPosition - positionXY[1]);
+
+            if (distanceX == 0 && distanceY == 0)
+            {
+                return 6;
+            }
 
             if ((positionXY[0] < 0 || positionXY[0] > 7) || (positionXY[1] < 0 || positionXY[1] > 7))
             {
