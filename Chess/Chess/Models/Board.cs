@@ -293,7 +293,7 @@ namespace Chess.Models
                     }
                 }
             }
-            return true;
+            return false;
         }
 
         public List<string> GetMovablePieces()

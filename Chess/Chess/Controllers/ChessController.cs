@@ -133,6 +133,7 @@ namespace Chess.Controllers
 
                         if (Board.IsKingInCheckmate(!IsWhite))
                         {
+                            Console.WriteLine("Black King is in Checkmate");
                             return true;
                         }
 
