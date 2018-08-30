@@ -88,52 +88,44 @@ namespace Chess.Controllers
 
             switch (type)
             {
-                case 1:
-
-                    PlacePiece(move);
-
-                    break;
-
                 case 2:
 
-                    //int[] piece = ConvertToXY(move.Substring(0, 2));
+                    if (IsWhite == Char.IsLower(piece.GetSymbol()))
+                    {
 
-                    //if (isWhite == Char.IsLower(Board.gameSpace[piece[0], piece[1]].GetSymbol()))
-                    //{
+                        int movementResult = Board.gameSpace[piece[0], piece[1]].Move(move.Substring(3));
 
-                    //    int movementResult = Board.gameSpace[piece[0], piece[1]].Move(move.Substring(3));
+                        switch (movementResult)
+                        {
+                            case 0:
+                                Console.WriteLine("---------------");
+                                Board.DisplayBoard();
+                                break;
+                            case 1:
+                                Console.WriteLine($"Invalid movement for a {Board.gameSpace[piece[0], piece[1]].GetType().Name}!");
+                                break;
+                            case 2:
+                                Console.WriteLine("You cannot move through your own pieces!");
+                                break;
+                            case 3:
+                            case 5:
+                                Console.WriteLine("You cannot move through enemy pieces!");
+                                break;
+                            case 4:
+                                Console.WriteLine("Invalid movement, out of bounds!");
+                                break;
+                        }
 
-                    //    switch (movementResult)
-                    //    {
-                    //        case 0:
-                    //            Console.WriteLine("---------------");
-                    //            Board.DisplayBoard();
-                    //            break;
-                    //        case 1:
-                    //            Console.WriteLine($"Invalid movement for a {Board.gameSpace[piece[0], piece[1]].GetType().Name}!");
-                    //            break;
-                    //        case 2:
-                    //            Console.WriteLine("You cannot move through your own pieces!");
-                    //            break;
-                    //        case 3:
-                    //        case 5:
-                    //            Console.WriteLine("You cannot move through enemy pieces!");
-                    //            break;
-                    //        case 4:
-                    //            Console.WriteLine("Invalid movement, out of bounds!");
-                    //            break;
-                    //    }
-
-                    //    isWhite = !isWhite;
-                    //}
-                    //else if (Board.gameSpace[piece[0], piece[1]].GetSymbol().Equals('-'))
-                    //{
-                    //    Console.WriteLine("There is no piece at that location to move");
-                    //}
-                    //else
-                    //{
-                    //    Console.WriteLine("You cannot move the opponents pieces");
-                    //}
+                        isWhite = !isWhite;
+                    }
+                    else if (Board.gameSpace[piece[0], piece[1]].GetSymbol().Equals('-'))
+                    {
+                        Console.WriteLine("There is no piece at that location to move");
+                    }
+                    else
+                    {
+                        Console.WriteLine("You cannot move the opponents pieces");
+                    }
 
                     break;
 
@@ -210,17 +202,12 @@ namespace Chess.Controllers
         {
             switch (move.Length)
             {
-                case 4:
-
-                    //Place a piece
-                    return 1;
-
-                case 5:
+                case 2:
 
                     //Move one piece
                     return 2;
 
-                case 11:
+                case 5:
 
                     //Move two pieces
                     return 3;

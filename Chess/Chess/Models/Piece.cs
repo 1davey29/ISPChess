@@ -41,14 +41,7 @@ namespace Chess.Models
         {
             List<string> moves = GetAvailableMoves();
 
-            int iter = 0;
-
-            foreach (string move in moves)
-            {
-                iter++;
-            }
-
-            if (iter > 0)
+            if (moves.Count > 0)
             {
                 return true;
             }
