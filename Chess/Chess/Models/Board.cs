@@ -297,7 +297,16 @@ namespace Chess.Models
 
         public void GetMovablePieces(bool isWhite)
         {
-
+            foreach (Piece p in gameSpace)
+            {
+                if (char.IsUpper(p.GetSymbol()) ^ isWhite)
+                {
+                    if (p.IsMovable())
+                    {
+                        Console.WriteLine($"{p.GetType()}:  {Convert.ToString(Convert.ToChar(p.XPosition + 97))}{p.YPosition + 1}");
+                    }
+                }
+            }
         }
     }
 }

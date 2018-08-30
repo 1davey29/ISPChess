@@ -37,6 +37,11 @@ namespace Chess.Models
             return !(Char.IsUpper(ChessController.Board.gameSpace[positionXY[0], positionXY[1]].GetSymbol()) ^ Char.IsUpper(GetSymbol()));
         }
 
+        public bool IsMovable()
+        {
+            return false;
+        }
+
         public Piece(Char symbol, int xPosition, int yPosition)
         {
             this.symbol = symbol;
