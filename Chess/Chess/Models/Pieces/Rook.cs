@@ -75,6 +75,8 @@ namespace Chess.Models.Pieces
 
             bool taken = false;
 
+            int value = 0;
+
             for (int i = 0; i < absDist; i++)
             {
                 if (isX)
@@ -95,7 +97,8 @@ namespace Chess.Models.Pieces
                                 if (Char.IsUpper(ChessController.Board.gameSpace[changedPos - i, piece.YPosition].GetSymbol()) ^ Char.IsUpper(piece.GetSymbol()))
                                 {
                                     //Change later, king check
-                                    return 5;
+                                    value = 5;
+                                    break;
                                 }
                                 else
                                 {
@@ -142,7 +145,8 @@ namespace Chess.Models.Pieces
 
                                 if (Char.IsUpper(ChessController.Board.gameSpace[changedPos + i, piece.YPosition].GetSymbol()) ^ Char.IsUpper(piece.GetSymbol()))
                                 {
-                                    return 5;
+                                    value = 5;
+                                    break;
                                 }
                                 else
                                 {
@@ -193,7 +197,8 @@ namespace Chess.Models.Pieces
 
                                 if (Char.IsUpper(ChessController.Board.gameSpace[piece.XPosition, changedPos - i].GetSymbol()) ^ Char.IsUpper(piece.GetSymbol()))
                                 {
-                                    return 5;
+                                    value = 5;
+                                    break;
                                 }
                                 else
                                 {
@@ -240,7 +245,8 @@ namespace Chess.Models.Pieces
 
                                 if (Char.IsUpper(ChessController.Board.gameSpace[piece.XPosition, changedPos + i].GetSymbol()) ^ Char.IsUpper(piece.GetSymbol()))
                                 {
-                                    return 5;
+                                    value = 5;
+                                    break;
                                 }
                                 else
                                 {
@@ -275,7 +281,7 @@ namespace Chess.Models.Pieces
                 }
             }
 
-            return 0;
+            return value;
         }
 
         public List<string> GetAvailableMoves(bool isQueen)
@@ -321,6 +327,8 @@ namespace Chess.Models.Pieces
                     Piece currentPieceClone = new Rook((char.IsLower(GetSymbol()) ? "White" : "Black"), xPos, yPos);
 
                     //BUG: Pawn promotes if can block or take to last row
+                    XPosition = xPos;
+                    YPosition = yPos;
                     Move(ChessController.ConvertToXY(move), true);
 
                     if (ChessController.Board.IsKingInCheck(ChessController.IsWhite)[2] == 1)
@@ -336,6 +344,14 @@ namespace Chess.Models.Pieces
                 {
                     movablePositions.Remove(move);
                 }
+
+                XPosition = xPos;
+                YPosition = yPos;
+            }
+
+            if (!movablePositions.Contains($"{ Convert.ToString(Convert.ToChar(XPosition + 97)) }{ Math.Abs(YPosition - 8) }"))
+            {
+                movablePositions.Add($"{ Convert.ToString(Convert.ToChar(XPosition + 97)) }{ Math.Abs(YPosition - 8) }");
             }
 
             return movablePositions;

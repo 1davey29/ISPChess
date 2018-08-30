@@ -82,9 +82,12 @@ namespace Chess.Models.Pieces
                     Piece currentPieceClone = new Queen((char.IsLower(GetSymbol()) ? "White" : "Black"), xPos, yPos);
 
                     //BUG: Pawn promotes if can block or take to last row
+                    XPosition = xPos;
+                    YPosition = yPos;
                     Move(ChessController.ConvertToXY(move), true);
+                    int[] isKingInCheck = ChessController.Board.IsKingInCheck(ChessController.IsWhite);
 
-                    if (ChessController.Board.IsKingInCheck(ChessController.IsWhite)[2] == 1)
+                    if (isKingInCheck[2] == 1)
                     {
                         remove.Add(move);
                     }
@@ -97,6 +100,14 @@ namespace Chess.Models.Pieces
                 {
                     moves.Remove(move);
                 }
+
+                XPosition = xPos;
+                YPosition = yPos;
+            }
+
+            if (!moves.Contains($"{ Convert.ToString(Convert.ToChar(XPosition + 97)) }{ Math.Abs(YPosition - 8) }"))
+            {
+                moves.Add($"{ Convert.ToString(Convert.ToChar(XPosition + 97)) }{ Math.Abs(YPosition - 8) }");
             }
 
             return moves;

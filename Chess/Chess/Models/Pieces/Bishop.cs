@@ -197,6 +197,8 @@ namespace Chess.Models.Pieces
                     Piece currentPieceClone = new Bishop((char.IsLower(GetSymbol()) ? "White" : "Black"), xPos, yPos);
 
                     //BUG: Pawn promotes if can block or take to last row
+                    XPosition = xPos;
+                    YPosition = yPos;
                     Move(ChessController.ConvertToXY(move), true);
 
                     if (ChessController.Board.IsKingInCheck(ChessController.IsWhite)[2] == 1)
@@ -212,6 +214,14 @@ namespace Chess.Models.Pieces
                 {
                     availibleMoves.Remove(move);
                 }
+
+                XPosition = xPos;
+                YPosition = yPos;
+            }
+
+            if (!availibleMoves.Contains($"{ Convert.ToString(Convert.ToChar(XPosition + 97)) }{ Math.Abs(YPosition - 8) }"))
+            {
+                availibleMoves.Add($"{ Convert.ToString(Convert.ToChar(XPosition + 97)) }{ Math.Abs(YPosition - 8) }");
             }
 
             return availibleMoves;
