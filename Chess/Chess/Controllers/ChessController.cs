@@ -66,6 +66,7 @@ namespace Chess.Controllers
 
             List<string> moves = piece.GetAvailableMoves();
 
+            //Move into GetAvailableMoves
             if (inCheck)
             {
                 foreach (string move2 in moves)

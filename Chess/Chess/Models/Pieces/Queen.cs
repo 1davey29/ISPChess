@@ -62,7 +62,10 @@ namespace Chess.Models.Pieces
 
             foreach (string move in bishopMoves)
             {
+                if (!moves.Contains(move))
+                {
                 moves.Add(move);
+                }
             }
 
             return moves;
