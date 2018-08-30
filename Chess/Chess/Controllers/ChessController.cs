@@ -12,7 +12,7 @@ namespace Chess.Controllers
 {
     public static class ChessController
     {
-        public static Board Board { get; set; } = new Board(LaunchState.NoPawns);
+        public static Board Board { get; set; } = new Board(LaunchState.FullStart);
         public static bool IsWhite { get; set; } = true;
 
         public static void Run()
@@ -114,8 +114,6 @@ namespace Chess.Controllers
                             case 6:
                                 goto pickNewPiece;
                         }
-
-                        Board.DisplayBoard();
 
                         if (Board.IsKingInCheckmate(!IsWhite))
                         {
