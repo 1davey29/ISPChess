@@ -57,7 +57,7 @@ namespace Chess.Models.Pieces
             return 0;
         }
 
-        public override int Move(int[] positionXY)
+        public override int Move(int[] positionXY, bool isActuallyMoving)
         {
             int distanceX = Math.Abs(XPosition - positionXY[0]);
             int distanceY = Math.Abs(YPosition - positionXY[1]);
@@ -96,9 +96,11 @@ namespace Chess.Models.Pieces
                 return valid;
             }
 
+            if (isActuallyMoving)
+            {
             UpdateBoard(positionXY);
-
             hasMoved = true;
+            }
 
             return 0;
         }
@@ -323,15 +325,36 @@ namespace Chess.Models.Pieces
 
         public override List<string> GetAvailableMoves()
         {
-            List<int[,]> movablePositions = new List<int[,]>();
+            List<string> movablePositions = new List<string>();
 
             for (int i = 0; i < 8; i++)
             {
                 if (i != XPosition)
                 {
-                    movablePositions.Add(new int[,]);
+                    int[] pos = new int[2] { i, YPosition };
+
+                    if (Move(pos, false) == 0 || Move(pos, false) == 6)
+                    {
+                        movablePositions.Add($"{ Convert.ToString(Convert.ToChar(pos[0] + 97)) }{ pos[1] + 1}");
+                        Console.WriteLine($"{ Convert.ToString(Convert.ToChar(pos[0] + 97)) }{ pos[1] + 1}");
+                    }
+                }
+                else
+                {
+                    for (int j = 0; j < 8; j++)
+                    {
+                        int[] pos = new int[2] { XPosition, j };
+
+                        if (Move(pos, false) == 0 || Move(pos, false) == 6)
+                        {
+                            movablePositions.Add($"{ Convert.ToString(Convert.ToChar(pos[0] + 97)) }{ pos[1] + 1}");
+                            Console.WriteLine($"{ Convert.ToString(Convert.ToChar(pos[0] + 97)) }{ pos[1] + 1}");
+                        }
+                    }
                 }
             }
+
+            return movablePositions;
         }
 
         public Rook(String color, int xPosition, int yPosition) : base(color.Equals("White") ? 'r' : 'R', xPosition, yPosition)
