@@ -81,6 +81,11 @@ namespace Chess.Models.Pieces
             return validationReturn;
         }
 
+        public override List<string> GetAvailableMoves()
+        {
+            throw new NotImplementedException();
+        }
+
         public Queen(String color, int x, int y) : base(color.Equals("White") ? 'q' : 'Q', x, y)
         {
         }

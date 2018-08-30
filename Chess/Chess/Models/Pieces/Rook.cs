@@ -321,6 +321,11 @@ namespace Chess.Models.Pieces
             return 0;
         }
 
+        public override List<string> GetAvailableMoves()
+        {
+            throw new NotImplementedException();
+        }
+
         public Rook(String color, int xPosition, int yPosition) : base(color.Equals("White") ? 'r' : 'R', xPosition, yPosition)
         {
         }

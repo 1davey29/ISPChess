@@ -173,6 +173,11 @@ namespace Chess.Models.Pieces
             return 0;
         }
 
+        public override List<string> GetAvailableMoves()
+        {
+            throw new NotImplementedException();
+        }
+
         public Pawn(String color, int x, int y) : base(color.Equals("White") ? 'p' : 'P', x, y)
         {
         }
