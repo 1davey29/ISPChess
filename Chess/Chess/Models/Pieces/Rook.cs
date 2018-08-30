@@ -278,7 +278,7 @@ namespace Chess.Models.Pieces
             return 0;
         }
 
-        public override List<string> GetAvailableMoves(bool isQueen)
+        public List<string> GetAvailableMoves(bool isQueen)
         {
             List<string> movablePositions = new List<string>();
 
@@ -332,6 +332,11 @@ namespace Chess.Models.Pieces
             }
 
             return movablePositions;
+        }
+
+        public override List<string> GetAvailableMoves()
+        {
+            return GetAvailableMoves(false);
         }
 
         public Rook(String color, int xPosition, int yPosition) : base(color.Equals("White") ? 'r' : 'R', xPosition, yPosition)

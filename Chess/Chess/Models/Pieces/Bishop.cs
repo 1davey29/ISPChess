@@ -100,7 +100,7 @@ namespace Chess.Models.Pieces
             return 0;
         }
 
-        public override List<string> GetAvailableMoves(bool isQueen)
+        public List<string> GetAvailableMoves(bool isQueen)
         {
             List<string> availibleMoves = new List<string>();
 
@@ -208,6 +208,11 @@ namespace Chess.Models.Pieces
             }
 
             return availibleMoves;
+        }
+
+        public override List<string> GetAvailableMoves()
+        {
+            return GetAvailableMoves(false);
         }
 
         public Bishop(String color, int x, int y) : base(color.Equals("White") ? 'b' : 'B', x, y)
