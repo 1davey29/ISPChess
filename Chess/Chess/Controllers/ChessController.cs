@@ -23,7 +23,7 @@ namespace Chess.Controllers
             {
                 Board.DisplayBoard();
                 isGameOver = TakeTurn();
-            } while (true);
+            } while (!isGameOver);
 
             Board.DisplayBoard();
 
@@ -131,9 +131,10 @@ namespace Chess.Controllers
                                 goto pickNewPiece;
                         }
 
+                        Board.DisplayBoard();
+
                         if (Board.IsKingInCheckmate(!IsWhite))
                         {
-                            Console.WriteLine("Black King is in Checkmate");
                             return true;
                         }
 

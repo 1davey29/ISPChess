@@ -216,6 +216,8 @@ namespace Chess.Models
             int[] kingInCheckArray = new int[4];
             kingInCheckArray[2] = 0;
             int count = 0;
+            Piece piece = gameSpace[pos[0], pos[1]];
+            gameSpace[pos[0], pos[1]] = new King((isKingWhite ? "White" : "Black"), pos[0], pos[1]);
 
             foreach (Piece p in gameSpace)
             {
@@ -238,6 +240,8 @@ namespace Chess.Models
 
             kingInCheckArray[3] = count;
 
+            gameSpace[pos[0], pos[1]] = piece;
+
             return kingInCheckArray;
         }
 
@@ -249,6 +253,7 @@ namespace Chess.Models
         public bool IsKingInCheckmate(bool isKingWhite)
         {
             int[] kingInCheckArray = IsKingInCheck(isKingWhite);
+            int[] kingPosInit = LocateKing(isKingWhite);
 
             if (kingInCheckArray[2] == 1)
             {
@@ -267,6 +272,7 @@ namespace Chess.Models
                             {
                                 if (gameSpace[x, y] is EmptyPiece || (char.IsLower(gameSpace[x, y].GetSymbol()) ^ isKingWhite))
                                 {
+                                    
                                     return false;
                                 }
                             }
