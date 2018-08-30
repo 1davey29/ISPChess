@@ -184,19 +184,19 @@ namespace Chess.Models.Pieces
                 switch (selection.ToLower())
                 {
                     case "queen":
-                        ChessController.Board.gameSpace[XPosition, YPosition] = new Queen((Char.IsLower(GetSymbol()) ? "white" : "black"), XPosition, YPosition);
+                        ChessController.Board.gameSpace[XPosition, YPosition] = new Queen((Char.IsLower(GetSymbol()) ? "White" : "Black"), XPosition, YPosition);
                         isPromoting = false;
                         break;
                     case "rook":
-                        ChessController.Board.gameSpace[XPosition, YPosition] = new Rook((Char.IsLower(GetSymbol()) ? "white" : "black"), XPosition, YPosition);
+                        ChessController.Board.gameSpace[XPosition, YPosition] = new Rook((Char.IsLower(GetSymbol()) ? "White" : "Black"), XPosition, YPosition);
                         isPromoting = false;
                         break;
                     case "bishop":
-                        ChessController.Board.gameSpace[XPosition, YPosition] = new Bishop((Char.IsLower(GetSymbol()) ? "white" : "black"), XPosition, YPosition);
+                        ChessController.Board.gameSpace[XPosition, YPosition] = new Bishop((Char.IsLower(GetSymbol()) ? "White" : "Black"), XPosition, YPosition);
                         isPromoting = false;
                         break;
                     case "knight":
-                        ChessController.Board.gameSpace[XPosition, YPosition] = new Knight((Char.IsLower(GetSymbol()) ? "white" : "black"), XPosition, YPosition);
+                        ChessController.Board.gameSpace[XPosition, YPosition] = new Knight((Char.IsLower(GetSymbol()) ? "White" : "Black"), XPosition, YPosition);
                         isPromoting = false;
                         break;
                     default:
