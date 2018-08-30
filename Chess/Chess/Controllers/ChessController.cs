@@ -27,29 +27,7 @@ namespace Chess.Controllers
 
             Board.DisplayBoard();
 
-            if (Board.IsKingInCheck(true)[2] == 1)
-            {
-                if (Board.IsKingInCheckmate(true))
-                {
-                    Console.WriteLine("White King is in checkmate!");
-                }
-                else
-                {
-                    Console.WriteLine("White King is in check!");
-                }
-            }
-
-            if (Board.IsKingInCheck(false)[2] == 1)
-            {
-                if (Board.IsKingInCheckmate(false))
-                {
-                    Console.WriteLine("Black King is in checkmate!");
-                }
-                else
-                {
-                    Console.WriteLine("Black King is in check!");
-                }
-            }
+            Console.WriteLine($"Game over, {(IsWhite ? "White" : "Black")} wins!");
         }
 
         public static bool TakeTurn()
