@@ -89,12 +89,13 @@ namespace Chess.Models.Pieces
                 UpdateBoard(positionXY);
 
                 hasMoved = true;
+
+                if (YPosition == 7 || YPosition == 0)
+                {
+                    Promote();
+                }
             }
 
-            if (YPosition == 7 || YPosition == 0)
-            {
-                Promote();
-            }
 
             return 0;
         }
