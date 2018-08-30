@@ -17,12 +17,11 @@ namespace Chess.Controllers
 
         public static void Run()
         {
-            Board.DisplayBoard();
-
             bool isGameOver = false;
 
             do
             {
+                Board.DisplayBoard();
                 isGameOver = TakeTurn();
             } while (!isGameOver);
 
@@ -58,17 +57,26 @@ namespace Chess.Controllers
 
             Console.WriteLine("Pieces that can be moved:");
 
-            List<string> moves = Board.GetMovablePieces();
+            List<string> pieces = Board.GetMovablePieces();
 
             Console.Write("\nWhich piece would you like to move? (type the alphanumeric position): ");
 
-            string move = Console.ReadLine();
+            string pieceString = Console.ReadLine();
 
-            while (!moves.Contains(move))
+            while (!pieces.Contains(pieceString))
             {
                 Console.WriteLine("\n\nError, Invalid Move");
                 Console.Write("\nWhich piece would you like to move? (type the alphanumeric position): ");
-                move = Console.ReadLine();
+                pieceString = Console.ReadLine();
+            }
+
+            string move = "";
+            Piece piece = Board.GetPieceAt(pieceString);
+            List<string> moves = piece.GetAvailableMoves();
+
+            while (!moves.Contains(move))
+            {
+
             }
 
             int type = RecognizeMoveType(move);
@@ -191,35 +199,6 @@ namespace Chess.Controllers
             }
 
             return false;
-        }
-
-        public static void SetMoveFilePath(string loadPath)
-        {
-            filePath = loadPath;
-        }
-
-        public static List<String> LoadMoveFile()
-        {
-            List<String> moves = new List<string>();
-            StreamReader reader = new StreamReader(filePath);
-
-            try
-            {
-                do
-                {
-                    moves.Add(reader.ReadLine());
-                }
-                while (reader.Peek() != -1);
-            }
-
-            catch
-            {
-                moves.Add("File is empty");
-            }
-
-            reader.Close();
-
-            return moves;
         }
 
         private static int RecognizeMoveType(String move)

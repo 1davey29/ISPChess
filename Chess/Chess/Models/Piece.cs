@@ -17,6 +17,7 @@ namespace Chess.Models
 
         public abstract int Move(String newPosition);
         public abstract int Move(int[] positionXY);
+        public abstract List<string> GetAvailableMoves();
 
         public Char GetSymbol()
         {

@@ -298,7 +298,7 @@ namespace Chess.Models
 
         public List<string> GetMovablePieces()
         {
-            List<string> moves = new List<string>();
+            List<string> pieces = new List<string>();
             foreach (Piece p in gameSpace)
             {
                 if (char.IsUpper(p.GetSymbol()) ^ ChessController.IsWhite)
@@ -306,13 +306,20 @@ namespace Chess.Models
                     if (p.IsMovable())
                     {
                         string moveString = $"{ Convert.ToString(Convert.ToChar(p.XPosition + 97)) }{ p.YPosition + 1}";
-                        moves.Add(moveString);
+                        pieces.Add(moveString);
                         Console.WriteLine($"{p.GetType()}:  {moveString}");
                     }
                 }
             }
 
-            return moves;
+            return pieces;
+        }
+
+        public Piece GetPieceAt(string move)
+        {
+            int[] pos = ChessController.ConvertToXY(move);
+
+            return gameSpace[pos[0], pos[1]];
         }
     }
 }
