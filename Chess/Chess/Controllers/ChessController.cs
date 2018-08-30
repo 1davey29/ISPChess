@@ -61,22 +61,23 @@ namespace Chess.Controllers
 
             Console.Write("\nWhich piece would you like to move? (type the alphanumeric position): ");
 
-            string pieceString = Console.ReadLine();
+            string pieceString = Console.ReadLine().ToLower();
 
             while (!pieces.Contains(pieceString))
             {
-                Console.WriteLine("\n\nError, Invalid Move");
+                Console.WriteLine("\n\nError, Invalid Piece");
                 Console.Write("\nWhich piece would you like to move? (type the alphanumeric position): ");
-                pieceString = Console.ReadLine();
+                pieceString = Console.ReadLine().ToLower();
             }
 
-            string move = "";
             Piece piece = Board.GetPieceAt(pieceString);
             List<string> moves = piece.GetAvailableMoves();
+            string move = Console.ReadLine().ToLower();
 
             while (!moves.Contains(move))
             {
-
+                Console.WriteLine("Error, Invalid Move");
+                move = Console.ReadLine().ToLower();
             }
 
             int type = RecognizeMoveType(move);
