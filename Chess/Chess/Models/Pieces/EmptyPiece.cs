@@ -18,6 +18,11 @@ namespace Chess.Models.Pieces
             return 0;
         }
 
+        public override List<string> GetAvailableMoves()
+        {
+            throw new NotImplementedException();
+        }
+
         public EmptyPiece(int xPosition, int yPosition) : base('-', xPosition, yPosition)
         {
         }

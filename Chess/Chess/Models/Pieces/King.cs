@@ -94,6 +94,11 @@ namespace Chess.Models.Pieces
             return 0;
         }
 
+        public override List<string> GetAvailableMoves()
+        {
+            throw new NotImplementedException();
+        }
+
         public King(String color, int x, int y) : base(color.Equals("White") ? 'k' : 'K', x, y)
         {
         }
