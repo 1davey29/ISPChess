@@ -294,5 +294,10 @@ namespace Chess.Models
             }
             return true;
         }
+
+        public void GetMovablePieces(bool isWhite)
+        {
+
+        }
     }
 }

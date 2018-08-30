@@ -69,6 +69,11 @@ namespace Chess.Controllers
 
         public static void TakeTurn(String move)
         {
+
+            Console.WriteLine("Pieces that can be moved:");
+
+            Board.GetMovablePieces(isWhite);
+
             int type = RecognizeMoveType(move);
 
             switch (type)
