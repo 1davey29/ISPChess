@@ -147,6 +147,7 @@ namespace Chess.Models.Pieces
                         isPromoting = false;
                         break;
                     default:
+                        Console.WriteLine("Invalid piece type!");
                         break;
                 }
             } while (isPromoting);
