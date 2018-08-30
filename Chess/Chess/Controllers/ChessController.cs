@@ -13,9 +13,9 @@ namespace Chess.Controllers
     public static class ChessController
     {
         private static string filePath;
-        private static bool isWhite = true;
 
-        public static Board Board { get; set; } = new Board(LaunchState.Empty);
+        public static Board Board { get; set; } = new Board(LaunchState.FullStart);
+        public static bool IsWhite { get; set; } = true;
 
         public static void Run()
         {
@@ -45,10 +45,6 @@ namespace Chess.Controllers
                     Console.WriteLine("White King is in check!");
                 }
             }
-            else
-            {
-                Console.WriteLine("White King is not in check!");
-            }
 
             if (Board.IsKingInCheck(false)[2] == 1)
             {
@@ -61,10 +57,6 @@ namespace Chess.Controllers
                     Console.WriteLine("Black King is in check!");
                 }
             }
-            else
-            {
-                Console.WriteLine("Black King is not in check!");
-            }
         }
 
         public static void TakeTurn(String move)
@@ -72,7 +64,7 @@ namespace Chess.Controllers
 
             Console.WriteLine("Pieces that can be moved:");
 
-            Board.GetMovablePieces(isWhite);
+            Board.GetMovablePieces();
 
             int type = RecognizeMoveType(move);
 

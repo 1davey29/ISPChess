@@ -1,4 +1,5 @@
-﻿using Chess.Enums;
+﻿using Chess.Controllers;
+using Chess.Enums;
 using Chess.Models.Pieces;
 using System;
 using System.Collections.Generic;
@@ -295,11 +296,11 @@ namespace Chess.Models
             return true;
         }
 
-        public void GetMovablePieces(bool isWhite)
+        public void GetMovablePieces()
         {
             foreach (Piece p in gameSpace)
             {
-                if (char.IsUpper(p.GetSymbol()) ^ isWhite)
+                if (char.IsUpper(p.GetSymbol()) ^ ChessController.IsWhite)
                 {
                     if (p.IsMovable())
                     {
