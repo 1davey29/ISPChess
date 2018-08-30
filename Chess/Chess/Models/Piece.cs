@@ -40,7 +40,7 @@ namespace Chess.Models
         {
             List<string> moves = GetAvailableMoves();
 
-            if (moves.Count > 0)
+            if (moves.Count > 1)
             {
                 return true;
             }
