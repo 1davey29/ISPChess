@@ -91,6 +91,11 @@ namespace Chess.Models.Pieces
                 hasMoved = true;
             }
 
+            if (YPosition == 7 || YPosition == 0)
+            {
+                Promote();
+            }
+
             return 0;
         }
 
@@ -113,6 +118,37 @@ namespace Chess.Models.Pieces
                 }
             }
             return availibleMoves;
+        }
+
+        public void Promote()
+        {
+            bool isPromoting = true;
+            Console.WriteLine("Your Pawn has earned a promotion! Which piece do you want to promote to? \nPick one: Queen, Rook, Bishop, Knight");
+            do
+            {
+                string selection = Console.ReadLine();
+                switch (selection.ToLower())
+                {
+                    case "queen":
+                        ChessController.Board.gameSpace[XPosition, YPosition] = new Queen((Char.IsLower(GetSymbol()) ? "white" : "black"), XPosition, YPosition);
+                        isPromoting = false;
+                        break;
+                    case "rook":
+                        ChessController.Board.gameSpace[XPosition, YPosition] = new Rook((Char.IsLower(GetSymbol()) ? "white" : "black"), XPosition, YPosition);
+                        isPromoting = false;
+                        break;
+                    case "bishop":
+                        ChessController.Board.gameSpace[XPosition, YPosition] = new Bishop((Char.IsLower(GetSymbol()) ? "white" : "black"), XPosition, YPosition);
+                        isPromoting = false;
+                        break;
+                    case "knight":
+                        ChessController.Board.gameSpace[XPosition, YPosition] = new Knight((Char.IsLower(GetSymbol()) ? "white" : "black"), XPosition, YPosition);
+                        isPromoting = false;
+                        break;
+                    default:
+                        break;
+                }
+            } while (isPromoting);
         }
 
         public Pawn(String color, int x, int y) : base(color.Equals("White") ? 'p' : 'P', x, y)
