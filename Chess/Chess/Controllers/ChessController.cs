@@ -47,6 +47,11 @@ namespace Chess.Controllers
 
             List<string> pieces = Board.GetMovablePieces();
 
+            if (inCheck)
+            {
+
+            }
+
             Console.Write("\nWhich piece would you like to move? (type the alphanumeric position): ");
 
             string pieceString = Console.ReadLine().ToLower();
@@ -60,9 +65,14 @@ namespace Chess.Controllers
 
             Piece piece = Board.GetPieceAt(pieceString);
 
-            Console.Write("\nWhere would you like to move your piece? (type the alphanumberic position, type your piece's position to cancel): ");
-
             List<string> moves = piece.GetAvailableMoves();
+
+            if (inCheck)
+            {
+
+            }
+
+            Console.Write("\nWhere would you like to move your piece? (type the alphanumberic position, type your piece's position to cancel): ");
 
             foreach (string move1 in moves)
             {
