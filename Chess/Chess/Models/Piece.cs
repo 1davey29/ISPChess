@@ -56,7 +56,7 @@ namespace Chess.Models
             return false;
         }
 
-        public List<string> GetAvailableMoves()
+        public virtual List<string> GetAvailableMoves()
         {
             return new List<string>();
         }

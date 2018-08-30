@@ -71,12 +71,16 @@ namespace Chess.Controllers
             }
 
             Piece piece = Board.GetPieceAt(pieceString);
+
+            Console.WriteLine("\nWhere would you like to move your piece? (type the alphanumberic position): ");
+
             List<string> moves = piece.GetAvailableMoves();
             string move = Console.ReadLine().ToLower();
 
             while (!moves.Contains(move))
             {
                 Console.WriteLine("Error, Invalid Move");
+                Console.WriteLine("\nWhere would you like to move your piece? (type the alphanumberic position): ");
                 move = Console.ReadLine().ToLower();
             }
 
