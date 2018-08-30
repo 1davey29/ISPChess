@@ -34,6 +34,8 @@ namespace Chess.Models.Pieces
                 }
             }
 
+            int value = 0;
+
             if (ChessController.Board.gameSpace[positionXY[0], positionXY[1]].GetType() != typeof(EmptyPiece))
             {
                 if (distanceX == 1 && distanceY == 1)
@@ -44,7 +46,7 @@ namespace Chess.Models.Pieces
                     }
                     if (ChessController.Board.gameSpace[positionXY[0], positionXY[1]].GetType() == typeof(King))
                     {
-                        return 5;
+                        value = 5;
                     }
                 }
                 else
@@ -60,8 +62,7 @@ namespace Chess.Models.Pieces
             {
                 return 1;
             }
-
-            if (distanceY == 2)
+            else if (distanceY == 2)
             {
                 for (int y = (YPosition - positionXY[1] > 0) ?
                     positionXY[1] : distanceY; (YPosition - positionXY[1] > 0) ? y <= distanceY :
@@ -84,20 +85,25 @@ namespace Chess.Models.Pieces
                 }
             }
 
-            if (isMoving && !isChecking)
+            if (isMoving)
             {
                 UpdateBoard(positionXY);
 
-                hasMoved = true;
-
-                if (YPosition == 7 || YPosition == 0)
+                if (!isChecking)
                 {
-                    Promote();
+                    hasMoved = true;
+
+                    if (YPosition == 7 || YPosition == 0)
+                    {
+                        Promote();
+                    }
                 }
+
             }
 
+            //ChessController.Board.DisplayBoard();
 
-            return 0;
+            return value;
         }
 
         public override int Move(int[] positionXY, bool isAcutallyMoving)
