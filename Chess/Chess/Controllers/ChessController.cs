@@ -34,9 +34,11 @@ namespace Chess.Controllers
         {
             Console.WriteLine("Turn: " + (IsWhite ? "White" : "Black"));
 
+            bool inCheck = Board.IsKingInCheck(IsWhite)[2] == 1;
+
             pickNewPiece:
 
-            if (Board.IsKingInCheck(IsWhite)[2] == 1)
+            if (inCheck)
             {
                 Console.WriteLine("Your King is in check!\n");
             }
