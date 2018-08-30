@@ -57,7 +57,19 @@ namespace Chess.Models.Pieces
 
         public override List<string> GetAvailableMoves()
         {
-            return new List<string>();
+            List<string> availibleMoves = new List<string>();
+            for (int x = -1; x < 2; x++)
+            {
+                for (int y = -1; y < 2; y++)
+                {
+                    int movementReturn = Move(new int[] { (x + XPosition), (y + YPosition) }, false);
+                    if (movementReturn == 0 || movementReturn == 6)
+                    {
+                        availibleMoves.Add($"{ Convert.ToString(Convert.ToChar(x + 97)) }{ Math.Abs(y - 8) }");
+                    }
+                }
+            }
+            return availibleMoves;
         }
 
         public King(String color, int x, int y) : base(color.Equals("White") ? 'k' : 'K', x, y)
