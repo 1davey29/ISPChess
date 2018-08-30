@@ -61,7 +61,19 @@ namespace Chess.Models.Pieces
 
         public override List<string> GetAvailableMoves()
         {
-            return new List<string>();
+            List<string> availibleMoves = new List<string>();
+            for (int x = 0; x < 8; x++)
+            {
+                for (int y = 0; y < 8; y++)
+                {
+                    int movementReturn = Move(new int[] { x, y }, false);
+                    if (movementReturn == 0 || movementReturn == 6)
+                    {
+                        availibleMoves.Add($"{ Convert.ToString(Convert.ToChar(x + 97)) }{ Math.Abs(y - 8) }");
+                    }
+                }
+            }
+            return availibleMoves;
         }
 
         public Knight(String color, int x, int y) : base(color.Equals("White") ? 'n' : 'N', x, y)
