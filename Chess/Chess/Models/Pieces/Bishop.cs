@@ -187,19 +187,19 @@ namespace Chess.Models.Pieces
 
             if (inCheck && !isQueen)
             {
-                foreach (string move in movablePositions)
+                foreach (string move in availibleMoves)
                 {
                     Piece tempPiece = ChessController.Board.GetPieceAt(move);
                     int xPos = XPosition;
                     int yPos = YPosition;
-                    Piece currentPieceClone = new Rook((char.IsLower(GetSymbol()) ? "White" : "Black"), XPosition, YPosition);
+                    Piece currentPieceClone = new Bishop((char.IsLower(GetSymbol()) ? "White" : "Black"), XPosition, YPosition);
 
                     //BUG: Pawn promotes if can block or take to last row
                     Move(ChessController.ConvertToXY(move), true);
 
                     if (ChessController.Board.IsKingInCheck(ChessController.IsWhite)[2] == 1)
                     {
-                        movablePositions.Remove(move);
+                        availibleMoves.Remove(move);
                     }
 
                     ChessController.Board.gameSpace[xPos, yPos] = currentPieceClone;
