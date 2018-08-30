@@ -93,7 +93,7 @@ namespace Chess.Controllers
                     if (IsWhite == Char.IsLower(piece.GetSymbol()))
                     {
 
-                        int movementResult = Board.gameSpace[piece[0], piece[1]].Move(move.Substring(3));
+                        int movementResult = piece.Move(move);
 
                         switch (movementResult)
                         {
@@ -102,7 +102,7 @@ namespace Chess.Controllers
                                 Board.DisplayBoard();
                                 break;
                             case 1:
-                                Console.WriteLine($"Invalid movement for a {Board.gameSpace[piece[0], piece[1]].GetType().Name}!");
+                                Console.WriteLine($"Invalid movement for a {piece.GetType().Name}!");
                                 break;
                             case 2:
                                 Console.WriteLine("You cannot move through your own pieces!");

@@ -307,7 +307,7 @@ namespace Chess.Models
                     {
                         string moveString = $"{ Convert.ToString(Convert.ToChar(p.XPosition + 97)) }{ p.YPosition + 1}";
                         pieces.Add(moveString);
-                        Console.WriteLine($"{p.GetType()}:  {moveString}");
+                        Console.WriteLine($"{p.GetType().Name}:  {moveString}");
                     }
                 }
             }
