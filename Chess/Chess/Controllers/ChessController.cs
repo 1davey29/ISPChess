@@ -101,7 +101,7 @@ namespace Chess.Controllers
                     if (IsWhite == Char.IsLower(piece.GetSymbol()))
                     {
 
-                        int movementResult = piece.Move(move);
+                        int movementResult = piece.Move(ConvertToXY(move), true);
 
                         switch (movementResult)
                         {
