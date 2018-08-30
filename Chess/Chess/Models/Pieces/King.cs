@@ -72,34 +72,36 @@ namespace Chess.Models.Pieces
 
             bool inCheck = ChessController.Board.IsKingInCheck(ChessController.IsWhite)[2] == 1;
 
-            if (inCheck)
+            List<string> remove = new List<string>();
+            int xPos = XPosition;
+            int yPos = YPosition;
+
+            foreach (string move in availibleMoves)
             {
-                List<string> remove = new List<string>();
-                int xPos = XPosition;
-                int yPos = YPosition;
+                Piece tempPiece = ChessController.Board.GetPieceAt(move);
+                Piece currentPieceClone = new King((char.IsLower(GetSymbol()) ? "White" : "Black"), xPos, yPos);
 
-                foreach (string move in availibleMoves)
+                //BUG: Pawn promotes if can block or take to last row
+                XPosition = xPos;
+                YPosition = yPos;
+                Move(ChessController.ConvertToXY(move), true);
+
+                if (ChessController.Board.IsKingInCheck(ChessController.IsWhite)[2] == 1)
                 {
-                    Piece tempPiece = ChessController.Board.GetPieceAt(move);
-                    Piece currentPieceClone = new King((char.IsLower(GetSymbol()) ? "White" : "Black"), xPos, yPos);
-
-                    //BUG: Pawn promotes if can block or take to last row
-                    Move(ChessController.ConvertToXY(move), true);
-
-                    if (ChessController.Board.IsKingInCheck(ChessController.IsWhite)[2] == 1)
-                    {
-                        remove.Add(move);
-                    }
-
-                    ChessController.Board.gameSpace[xPos, yPos] = currentPieceClone;
-                    ChessController.Board.gameSpace[ChessController.ConvertToXY(move)[0], ChessController.ConvertToXY(move)[1]] = tempPiece;
+                    remove.Add(move);
                 }
 
-                foreach (string move in remove)
-                {
-                    availibleMoves.Remove(move);
-                }
+                ChessController.Board.gameSpace[xPos, yPos] = currentPieceClone;
+                ChessController.Board.gameSpace[ChessController.ConvertToXY(move)[0], ChessController.ConvertToXY(move)[1]] = tempPiece;
             }
+
+            foreach (string move in remove)
+            {
+                availibleMoves.Remove(move);
+            }
+
+            XPosition = xPos;
+            YPosition = yPos;
 
             if (!availibleMoves.Contains($"{ Convert.ToString(Convert.ToChar(XPosition + 97)) }{ Math.Abs(YPosition - 8) }"))
             {
