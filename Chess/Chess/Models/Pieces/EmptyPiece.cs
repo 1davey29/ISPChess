@@ -8,12 +8,7 @@ namespace Chess.Models.Pieces
 {
     public class EmptyPiece : Piece
     {
-        public override int Move(string newPosition)
-        {
-            return 0;
-        }
-
-        public override int Move(int[] positionXY)
+        public override int Move(int[] positionXY, bool isMoving)
         {
             return 0;
         }

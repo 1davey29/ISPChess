@@ -221,7 +221,7 @@ namespace Chess.Models
             {
                 if (char.IsLower(p.GetSymbol()) ^ isKingWhite)
                 {
-                    if (p.Move(pos) == 5)
+                    if (p.Move(pos, false) == 5)
                     {
                         kingInCheckArray[2] = 1;
                         kingInCheckArray[0] = p.XPosition;
@@ -229,7 +229,7 @@ namespace Chess.Models
                         count++;
                     }
 
-                    if (p.Move(pos) == 6)
+                    if (p.Move(pos, false) == 6)
                     {
                         count = 1;
                     }
@@ -285,7 +285,7 @@ namespace Chess.Models
                     {
                         if (char.IsUpper(p.GetSymbol()) ^ isKingWhite)
                         {
-                            if (p.Move(new int[2] { kingInCheckArray[0], kingInCheckArray[1] }) == 0)
+                            if (p.Move(new int[2] { kingInCheckArray[0], kingInCheckArray[1] }, false) == 0)
                             {
                                 return false;
                             }
@@ -301,7 +301,7 @@ namespace Chess.Models
             List<string> pieces = new List<string>();
             foreach (Piece p in gameSpace)
             {
-                if (char.IsUpper(p.GetSymbol()) ^ ChessController.IsWhite)
+                if (char.IsLower(p.GetSymbol()) ^ ChessController.IsWhite)
                 {
                     if (p.IsMovable())
                     {

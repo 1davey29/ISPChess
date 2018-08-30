@@ -12,7 +12,7 @@ namespace Chess.Controllers
 {
     public static class ChessController
     {
-        public static Board Board { get; set; } = new Board(LaunchState.FullStart);
+        public static Board Board { get; set; } = new Board(LaunchState.NoPawns);
         public static bool IsWhite { get; set; } = true;
 
         public static void Run()
