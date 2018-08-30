@@ -172,12 +172,12 @@ namespace Chess.Models.Pieces
             {
                 for (int y = 0; y < 8; y++)
                 {
-                    if ((x - XPosition) == (y - YPosition))
+                    if (Math.Abs(x - XPosition) == Math.Abs(y - YPosition))
                     {
                         int checkMovement = Move(new int[] { x, y }, false);
                         if (checkMovement == 0 || checkMovement == 6)
                         {
-                            availibleMoves.Add($"{ Convert.ToString(Convert.ToChar(x + 97)) }{ y + 1}");
+                            availibleMoves.Add($"{ Convert.ToString(Convert.ToChar(x + 97)) }{ Math.Abs(y - 8) }");
                         }
                     }
                 }

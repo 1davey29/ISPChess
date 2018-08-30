@@ -301,11 +301,11 @@ namespace Chess.Models
             List<string> pieces = new List<string>();
             foreach (Piece p in gameSpace)
             {
-                if (char.IsLower(p.GetSymbol()) ^ ChessController.IsWhite)
+                if (char.IsUpper(p.GetSymbol()) ^ ChessController.IsWhite)
                 {
                     if (p.IsMovable())
                     {
-                        string moveString = $"{ Convert.ToString(Convert.ToChar(p.XPosition + 97)) }{ p.YPosition + 1}";
+                        string moveString = $"{ Convert.ToString(Convert.ToChar(p.XPosition + 97)) }{ Math.Abs(p.YPosition - 8) }";
                         pieces.Add(moveString);
                         Console.WriteLine($"{p.GetType().Name}:  {moveString}");
                     }

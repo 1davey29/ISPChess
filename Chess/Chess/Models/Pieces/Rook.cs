@@ -290,8 +290,8 @@ namespace Chess.Models.Pieces
 
                     if (Move(pos, false) == 0 || Move(pos, false) == 6)
                     {
-                        movablePositions.Add($"{ Convert.ToString(Convert.ToChar(pos[0] + 97)) }{ pos[1] + 1}");
-                        Console.WriteLine($"{ Convert.ToString(Convert.ToChar(pos[0] + 97)) }{ pos[1] + 1}");
+                        movablePositions.Add($"{ Convert.ToString(Convert.ToChar(pos[0] + 97)) }{ Math.Abs(pos[1] - 8) }");
+                        Console.WriteLine($"{ Convert.ToString(Convert.ToChar(pos[0] + 97)) }{ Math.Abs(pos[1] - 8) }");
                     }
                 }
                 else
@@ -302,8 +302,8 @@ namespace Chess.Models.Pieces
 
                         if (Move(pos, false) == 0 || Move(pos, false) == 6)
                         {
-                            movablePositions.Add($"{ Convert.ToString(Convert.ToChar(pos[0] + 97)) }{ pos[1] + 1}");
-                            Console.WriteLine($"{ Convert.ToString(Convert.ToChar(pos[0] + 97)) }{ pos[1] + 1}");
+                            movablePositions.Add($"{ Convert.ToString(Convert.ToChar(pos[0] + 97)) }{ Math.Abs(pos[1] - 8) }");
+                            Console.WriteLine($"{ Convert.ToString(Convert.ToChar(pos[0] + 97)) }{ Math.Abs(pos[1] - 8) }");
                         }
                     }
                 }

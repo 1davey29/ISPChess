@@ -23,7 +23,7 @@ namespace Chess.Controllers
             {
                 Board.DisplayBoard();
                 isGameOver = TakeTurn();
-            } while (!isGameOver);
+            } while (true);
 
             Board.DisplayBoard();
 
@@ -83,6 +83,12 @@ namespace Chess.Controllers
             Console.Write("\nWhere would you like to move your piece? (type the alphanumberic position, type your piece's position to cancel): ");
 
             List<string> moves = piece.GetAvailableMoves();
+
+            foreach (string move1 in moves)
+            {
+                Console.WriteLine(move1);
+            }
+
             string move = Console.ReadLine().ToLower();
 
             while (!moves.Contains(move))
