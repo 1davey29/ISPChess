@@ -278,7 +278,7 @@ namespace Chess.Models.Pieces
             return 0;
         }
 
-        public override List<string> GetAvailableMoves()
+        public override List<string> GetAvailableMoves(bool isQueen)
         {
             List<string> movablePositions = new List<string>();
 
@@ -309,7 +309,7 @@ namespace Chess.Models.Pieces
 
             bool inCheck = ChessController.Board.IsKingInCheck(ChessController.IsWhite)[2] == 1;
 
-            if (inCheck)
+            if (inCheck && !isQueen)
             {
                 foreach (string move in movablePositions)
                 {

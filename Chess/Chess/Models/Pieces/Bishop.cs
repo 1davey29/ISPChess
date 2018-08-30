@@ -100,7 +100,7 @@ namespace Chess.Models.Pieces
             return 0;
         }
 
-        public override List<string> GetAvailableMoves()
+        public override List<string> GetAvailableMoves(bool isQueen)
         {
             List<string> availibleMoves = new List<string>();
 
@@ -180,6 +180,30 @@ namespace Chess.Models.Pieces
                             availibleMoves.Add($"{ Convert.ToString(Convert.ToChar(x + 97)) }{ Math.Abs(y - 8) }");
                         }
                     }
+                }
+            }
+
+            bool inCheck = ChessController.Board.IsKingInCheck(ChessController.IsWhite)[2] == 1;
+
+            if (inCheck && !isQueen)
+            {
+                foreach (string move in movablePositions)
+                {
+                    Piece tempPiece = ChessController.Board.GetPieceAt(move);
+                    int xPos = XPosition;
+                    int yPos = YPosition;
+                    Piece currentPieceClone = new Rook((char.IsLower(GetSymbol()) ? "White" : "Black"), XPosition, YPosition);
+
+                    //BUG: Pawn promotes if can block or take to last row
+                    Move(ChessController.ConvertToXY(move), true);
+
+                    if (ChessController.Board.IsKingInCheck(ChessController.IsWhite)[2] == 1)
+                    {
+                        movablePositions.Remove(move);
+                    }
+
+                    ChessController.Board.gameSpace[xPos, yPos] = currentPieceClone;
+                    ChessController.Board.gameSpace[ChessController.ConvertToXY(move)[0], ChessController.ConvertToXY(move)[1]] = tempPiece;
                 }
             }
 

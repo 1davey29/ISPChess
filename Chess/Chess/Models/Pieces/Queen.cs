@@ -50,9 +50,9 @@ namespace Chess.Models.Pieces
         public override List<string> GetAvailableMoves()
         {
             Rook tempRook = new Rook(char.IsLower(GetSymbol()) ? "White" : "Black", XPosition, YPosition);
-            List<string> rookMoves = tempRook.GetAvailableMoves();
+            List<string> rookMoves = tempRook.GetAvailableMoves(true);
             Bishop tempBishop = new Bishop(char.IsLower(GetSymbol()) ? "White" : "Black", XPosition, YPosition);
-            List<string> bishopMoves = tempBishop.GetAvailableMoves();
+            List<string> bishopMoves = tempBishop.GetAvailableMoves(true);
             List<string> moves = new List<string>();
 
             foreach (string move in rookMoves)
