@@ -65,36 +65,43 @@ namespace Chess.Models.Pieces
                     int movementReturn = Move(new int[] { (x + XPosition), (y + YPosition) }, false);
                     if (movementReturn == 0 || movementReturn == 6)
                     {
-                        availibleMoves.Add($"{ Convert.ToString(Convert.ToChar(x + 97)) }{ Math.Abs(y - 8) }");
+                        availibleMoves.Add($"{ Convert.ToString(Convert.ToChar((x + XPosition) + 97)) }{ Math.Abs((y + XPosition) - 8) }");
                     }
                 }
             }
 
-            bool inCheck = ChessController.Board.IsKingInCheck(ChessController.IsWhite)[2] == 1;
+            //bool inCheck = ChessController.Board.IsKingInCheck(ChessController.IsWhite)[2] == 1;
 
-            if (inCheck)
-            {
-                foreach (string move in availibleMoves)
-                {
-                    Piece tempPiece = ChessController.Board.GetPieceAt(move);
-                    int xPos = XPosition;
-                    int yPos = YPosition;
-                    Piece currentPieceClone = new King((char.IsLower(GetSymbol()) ? "White" : "Black"), XPosition, YPosition);
+            //if (inCheck)
+            //{
+            //    List<string> remove = new List<string>();
+            //    int xPos = XPosition;
+            //    int yPos = YPosition;
 
-                    //BUG: Pawn promotes if can block or take to last row
-                    Move(ChessController.ConvertToXY(move), true);
+            //    foreach (string move in availibleMoves)
+            //    {
+            //        Piece tempPiece = ChessController.Board.GetPieceAt(move);
+            //        Piece currentPieceClone = new King((char.IsLower(GetSymbol()) ? "White" : "Black"), xPos, yPos);
 
-                    if (ChessController.Board.IsKingInCheck(ChessController.IsWhite)[2] == 1)
-                    {
-                        availibleMoves.Remove(move);
-                    }
+            //        //BUG: Pawn promotes if can block or take to last row
+            //        Move(ChessController.ConvertToXY(move), true);
 
-                    ChessController.Board.gameSpace[xPos, yPos] = currentPieceClone;
-                    ChessController.Board.gameSpace[ChessController.ConvertToXY(move)[0], ChessController.ConvertToXY(move)[1]] = tempPiece;
-                }
-            }
+            //        if (ChessController.Board.IsKingInCheck(ChessController.IsWhite)[2] == 1)
+            //        {
+            //            remove.Add(move);
+            //        }
 
-            return availibleMoves;
+            //        ChessController.Board.gameSpace[xPos, yPos] = currentPieceClone;
+            //        ChessController.Board.gameSpace[ChessController.ConvertToXY(move)[0], ChessController.ConvertToXY(move)[1]] = tempPiece;
+            //    }
+
+            //    foreach (string move in remove)
+            //    {
+            //        availibleMoves.Remove(move);
+            //    }
+            //}
+
+                return availibleMoves;
         }
 
         public King(String color, int x, int y) : base(color.Equals("White") ? 'k' : 'K', x, y)

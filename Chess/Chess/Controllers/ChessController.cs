@@ -12,7 +12,7 @@ namespace Chess.Controllers
 {
     public static class ChessController
     {
-        public static Board Board { get; set; } = new Board(LaunchState.FullStart);
+        public static Board Board { get; set; } = new Board(LaunchState.NoPawns);
         public static bool IsWhite { get; set; } = true;
 
         public static void Run()
@@ -65,27 +65,6 @@ namespace Chess.Controllers
             Piece piece = Board.GetPieceAt(pieceString);
 
             List<string> moves = piece.GetAvailableMoves();
-
-            //Move into GetAvailableMoves
-            if (inCheck)
-            {
-                foreach (string move2 in moves)
-                {
-                    Piece tempPiece = Board.GetPieceAt(move2);
-                    string pieceInit = pieceString;
-
-                    //BUG: Pawn promotes if can block or take to last row
-                    piece.Move(ConvertToXY(move2), true);
-
-                    if (Board.IsKingInCheck(IsWhite)[2] == 1)
-                    {
-                        moves.Remove(move2);
-                    }
-
-                    Board.gameSpace[ConvertToXY(pieceString)[0], ConvertToXY(pieceString)[1]] = piece;
-                    Board.gameSpace[ConvertToXY(move2)[0], ConvertToXY(move2)[1]] = tempPiece;
-                }
-            }
 
             Console.Write("\nWhere would you like to move your piece? (type the alphanumberic position, type your piece's position to cancel): ");
 

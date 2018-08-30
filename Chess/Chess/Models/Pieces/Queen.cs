@@ -72,23 +72,30 @@ namespace Chess.Models.Pieces
 
             if (inCheck)
             {
+                List<string> remove = new List<string>();
+                int xPos = XPosition;
+                int yPos = YPosition;
+
                 foreach (string move in moves)
                 {
                     Piece tempPiece = ChessController.Board.GetPieceAt(move);
-                    int xPos = XPosition;
-                    int yPos = YPosition;
-                    Piece currentPieceClone = new Queen((char.IsLower(GetSymbol()) ? "White" : "Black"), XPosition, YPosition);
+                    Piece currentPieceClone = new Queen((char.IsLower(GetSymbol()) ? "White" : "Black"), xPos, yPos);
 
                     //BUG: Pawn promotes if can block or take to last row
                     Move(ChessController.ConvertToXY(move), true);
 
                     if (ChessController.Board.IsKingInCheck(ChessController.IsWhite)[2] == 1)
                     {
-                        moves.Remove(move);
+                        remove.Add(move);
                     }
 
                     ChessController.Board.gameSpace[xPos, yPos] = currentPieceClone;
                     ChessController.Board.gameSpace[ChessController.ConvertToXY(move)[0], ChessController.ConvertToXY(move)[1]] = tempPiece;
+                }
+
+                foreach (string move in remove)
+                {
+                    moves.Remove(move);
                 }
             }
 
