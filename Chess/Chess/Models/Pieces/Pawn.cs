@@ -11,7 +11,7 @@ namespace Chess.Models.Pieces
     {
         private bool hasMoved = false;
 
-        public override int Move(int[] positionXY, bool isMoving)
+        public int Move(int[] positionXY, bool isMoving, bool isChecking)
         {
             int distanceX = Math.Abs(XPosition - positionXY[0]);
             int distanceY = Math.Abs(YPosition - positionXY[1]);
@@ -84,7 +84,7 @@ namespace Chess.Models.Pieces
                 }
             }
 
-            if (isMoving)
+            if (isMoving && !isChecking)
             {
                 UpdateBoard(positionXY);
 
@@ -98,6 +98,11 @@ namespace Chess.Models.Pieces
 
 
             return 0;
+        }
+
+        public override int Move(int[] positionXY, bool isAcutallyMoving)
+        {
+            return Move(positionXY, isAcutallyMoving, false);
         }
 
         public override List<string> GetAvailableMoves()
@@ -118,6 +123,31 @@ namespace Chess.Models.Pieces
                     }
                 }
             }
+
+            bool inCheck = ChessController.Board.IsKingInCheck(ChessController.IsWhite)[2] == 1;
+
+            if (inCheck)
+            {
+                foreach (string move in availibleMoves)
+                {
+                    Piece tempPiece = ChessController.Board.GetPieceAt(move);
+                    int xPos = XPosition;
+                    int yPos = YPosition;
+                    Piece currentPieceClone = new Pawn((char.IsLower(GetSymbol()) ? "White" : "Black"), XPosition, YPosition);
+
+                    //BUG: Pawn promotes if can block or take to last row
+                    Move(ChessController.ConvertToXY(move), true, true);
+
+                    if (ChessController.Board.IsKingInCheck(ChessController.IsWhite)[2] == 1)
+                    {
+                        availibleMoves.Remove(move);
+                    }
+
+                    ChessController.Board.gameSpace[xPos, yPos] = currentPieceClone;
+                    ChessController.Board.gameSpace[ChessController.ConvertToXY(move)[0], ChessController.ConvertToXY(move)[1]] = tempPiece;
+                }
+            }
+
             return availibleMoves;
         }
 
