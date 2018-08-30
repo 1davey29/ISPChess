@@ -49,7 +49,6 @@ namespace Chess.Controllers
 
             if (inCheck)
             {
-
             }
 
             Console.Write("\nWhich piece would you like to move? (type the alphanumeric position): ");
@@ -69,7 +68,22 @@ namespace Chess.Controllers
 
             if (inCheck)
             {
+                foreach (string move2 in moves)
+                {
+                    Piece tempPiece = Board.GetPieceAt(move2);
+                    string pieceInit = pieceString;
 
+                    //BUG: Pawn promotes if can block or take to last row
+                    piece.Move(ConvertToXY(move2), true);
+
+                    if (Board.IsKingInCheck(IsWhite)[2] == 1)
+                    {
+                        moves.Remove(move2);
+                    }
+
+                    Board.gameSpace[ConvertToXY(pieceString)[0], ConvertToXY(pieceString)[1]] = piece;
+                    Board.gameSpace[ConvertToXY(move2)[0], ConvertToXY(move2)[1]] = tempPiece;
+                }
             }
 
             Console.Write("\nWhere would you like to move your piece? (type the alphanumberic position, type your piece's position to cancel): ");
