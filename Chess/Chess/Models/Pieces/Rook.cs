@@ -323,7 +323,15 @@ namespace Chess.Models.Pieces
 
         public override List<string> GetAvailableMoves()
         {
-            throw new NotImplementedException();
+            List<int[,]> movablePositions = new List<int[,]>();
+
+            for (int i = 0; i < 8; i++)
+            {
+                if (i != XPosition)
+                {
+                    movablePositions.Add(new int[,]);
+                }
+            }
         }
 
         public Rook(String color, int xPosition, int yPosition) : base(color.Equals("White") ? 'r' : 'R', xPosition, yPosition)
