@@ -12,8 +12,6 @@ namespace Chess.Controllers
 {
     public static class ChessController
     {
-        private static string filePath;
-
         public static Board Board { get; set; } = new Board(LaunchState.FullStart);
         public static bool IsWhite { get; set; } = true;
 
@@ -21,16 +19,12 @@ namespace Chess.Controllers
         {
             Board.DisplayBoard();
 
-            Console.Write("Please enter the file path of your move file: ");
+            bool isGameOver = false;
 
-            SetMoveFilePath(Console.ReadLine());
-
-            List<String> moves = LoadMoveFile();
-
-            foreach (String move in moves)
+            do
             {
-                TakeTurn(move);
-            }
+                isGameOver = TakeTurn();
+            } while (!isGameOver);
 
             Board.DisplayBoard();
 
@@ -59,12 +53,23 @@ namespace Chess.Controllers
             }
         }
 
-        public static void TakeTurn(String move)
+        public static bool TakeTurn()
         {
 
             Console.WriteLine("Pieces that can be moved:");
 
-            Board.GetMovablePieces();
+            List<string> moves = Board.GetMovablePieces();
+
+            Console.Write("\nWhich piece would you like to move? (type the alphanumeric position): ");
+
+            string move = Console.ReadLine();
+
+            while (!moves.Contains(move))
+            {
+                Console.WriteLine("\n\nError, Invalid Move");
+                Console.Write("\nWhich piece would you like to move? (type the alphanumeric position): ");
+                move = Console.ReadLine();
+            }
 
             int type = RecognizeMoveType(move);
 
@@ -184,6 +189,8 @@ namespace Chess.Controllers
 
                     break;
             }
+
+            return false;
         }
 
         public static void SetMoveFilePath(string loadPath)

@@ -296,18 +296,23 @@ namespace Chess.Models
             return true;
         }
 
-        public void GetMovablePieces()
+        public List<string> GetMovablePieces()
         {
+            List<string> moves = new List<string>();
             foreach (Piece p in gameSpace)
             {
                 if (char.IsUpper(p.GetSymbol()) ^ ChessController.IsWhite)
                 {
                     if (p.IsMovable())
                     {
-                        Console.WriteLine($"{p.GetType()}:  {Convert.ToString(Convert.ToChar(p.XPosition + 97))}{p.YPosition + 1}");
+                        string moveString = $"{ Convert.ToString(Convert.ToChar(p.XPosition + 97)) }{ p.YPosition + 1}";
+                        moves.Add(moveString);
+                        Console.WriteLine($"{p.GetType()}:  {moveString}");
                     }
                 }
             }
+
+            return moves;
         }
     }
 }
