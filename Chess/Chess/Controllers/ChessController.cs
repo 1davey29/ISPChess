@@ -54,6 +54,14 @@ namespace Chess.Controllers
 
         public static bool TakeTurn()
         {
+            Console.WriteLine("Turn: " + (IsWhite ? "White" : "Black"));
+
+            pickNewPiece:
+
+            if (Board.IsKingInCheck(IsWhite)[2] == 1)
+            {
+                Console.WriteLine("Your King is in check!\n");
+            }
 
             Console.WriteLine("Pieces that can be moved:");
 
@@ -72,7 +80,7 @@ namespace Chess.Controllers
 
             Piece piece = Board.GetPieceAt(pieceString);
 
-            Console.WriteLine("\nWhere would you like to move your piece? (type the alphanumberic position): ");
+            Console.Write("\nWhere would you like to move your piece? (type the alphanumberic position, type your piece's position to cancel): ");
 
             List<string> moves = piece.GetAvailableMoves();
             string move = Console.ReadLine().ToLower();
@@ -80,7 +88,7 @@ namespace Chess.Controllers
             while (!moves.Contains(move))
             {
                 Console.WriteLine("Error, Invalid Move");
-                Console.WriteLine("\nWhere would you like to move your piece? (type the alphanumberic position): ");
+                Console.Write("\nWhere would you like to move your piece? (type the alphanumberic position, type your piece's position to cancel): ");
                 move = Console.ReadLine().ToLower();
             }
 
@@ -99,7 +107,6 @@ namespace Chess.Controllers
                         {
                             case 0:
                                 Console.WriteLine("---------------");
-                                Board.DisplayBoard();
                                 break;
                             case 1:
                                 Console.WriteLine($"Invalid movement for a {piece.GetType().Name}!");
@@ -114,17 +121,16 @@ namespace Chess.Controllers
                             case 4:
                                 Console.WriteLine("Invalid movement, out of bounds!");
                                 break;
+                            case 6:
+                                goto pickNewPiece;
                         }
 
-                        isWhite = !isWhite;
-                    }
-                    else if (Board.gameSpace[piece[0], piece[1]].GetSymbol().Equals('-'))
-                    {
-                        Console.WriteLine("There is no piece at that location to move");
-                    }
-                    else
-                    {
-                        Console.WriteLine("You cannot move the opponents pieces");
+                        if (Board.IsKingInCheckmate(!IsWhite))
+                        {
+                            return true;
+                        }
+
+                        IsWhite = !IsWhite;
                     }
 
                     break;
