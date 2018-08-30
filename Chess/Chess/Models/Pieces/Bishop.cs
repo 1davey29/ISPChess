@@ -37,7 +37,7 @@ namespace Chess.Models.Pieces
             return validationReturn;
         }
 
-        public override int Move(int[] positionXY)
+        public override int Move(int[] positionXY, bool isMoving)
         {
             int distanceX = Math.Abs(XPosition - positionXY[0]);
             int distanceY = Math.Abs(YPosition - positionXY[1]);
@@ -53,7 +53,7 @@ namespace Chess.Models.Pieces
             }
 
             int validationReturn = PieceInWay(this, positionXY, distanceX, distanceY, false);
-            if (validationReturn == 0)
+            if (validationReturn == 0 && isMoving)
             {
                 UpdateBoard(positionXY);
             }
@@ -130,7 +130,88 @@ namespace Chess.Models.Pieces
 
         public override List<string> GetAvailableMoves()
         {
-            throw new NotImplementedException();
+            List<string> availibleMoves = new List<string>();
+
+            //int xIter = 0;
+            //int yIter = 0;
+            //for (int x = XPosition; x < 8; x++)
+            //{
+            //    xIter++;
+            //    for (int y = YPosition; y < 8; y++)
+            //    {
+            //        yIter++;
+            //        if (xIter == yIter)
+            //        {
+            //            if ()
+            //            {
+            //                availibleMoves.Add($"{ Convert.ToString(Convert.ToChar(x + 97)) }{ y + 1}");
+
+            //            }
+            //        }
+            //    }
+            //}
+
+            //xIter = 0;
+            //yIter = 0;
+            //for (int x = XPosition; x < 8; x++)
+            //{
+            //    xIter++;
+            //    for (int y = YPosition; y >= 0; y--)
+            //    {
+            //        yIter++;
+            //        if (xIter == yIter)
+            //        {
+
+            //        }
+            //    }
+            //}
+
+            //xIter = 0;
+            //yIter = 0;
+            //for (int x = XPosition; x >= 0; x--)
+            //{
+            //    xIter++;
+            //    for (int y = YPosition; y < 8; y++)
+            //    {
+            //        yIter++;
+            //        if (xIter == yIter)
+            //        {
+
+            //        }
+            //    }
+            //}
+
+            //xIter = 0;
+            //yIter = 0;
+            //for (int x = XPosition; x >= 0; x--)
+            //{
+            //    xIter++;
+            //    for (int y = YPosition; y >= 0; y--)
+            //    {
+            //        yIter++;
+            //        if (xIter == yIter)
+            //        {
+
+            //        }
+            //    }
+            //}
+
+            for (int x = 0; x < 8; x++)
+            {
+                for (int y = 0; y < 8; y++)
+                {
+                    if ((x - XPosition) == (y - YPosition))
+                    {
+                        int checkMovement = Move(new int[] { x, y }, false);
+                        if (checkMovement == 0 || checkMovement == 6)
+                        {
+                            availibleMoves.Add($"{ Convert.ToString(Convert.ToChar(x + 97)) }{ y + 1}");
+                        }
+                    }
+                }
+            }
+
+            return availibleMoves;
         }
 
         public Bishop(String color, int x, int y) : base(color.Equals("White") ? 'b' : 'B', x, y)
