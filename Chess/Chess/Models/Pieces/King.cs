@@ -65,7 +65,7 @@ namespace Chess.Models.Pieces
                     int movementReturn = Move(new int[] { (x + XPosition), (y + YPosition) }, false);
                     if (movementReturn == 0 || movementReturn == 6)
                     {
-                        availibleMoves.Add($"{ Convert.ToString(Convert.ToChar((x + XPosition) + 97)) }{ Math.Abs((y + XPosition) - 8) }");
+                        availibleMoves.Add($"{ Convert.ToString(Convert.ToChar((x + XPosition) + 97)) }{ Math.Abs((y + YPosition) - 8) }");
                     }
                 }
             }
