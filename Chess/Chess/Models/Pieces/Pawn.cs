@@ -96,7 +96,23 @@ namespace Chess.Models.Pieces
 
         public override List<string> GetAvailableMoves()
         {
-            return new List<string>();
+
+            //TODO this is a lazy, inefficient method, clean up if possible
+                //No reason for a pawn to check the ENTIRE board for moves
+
+            List<string> availibleMoves = new List<string>();
+            for (int x = 0; x < 8; x++)
+            {
+                for (int y = 0; y < 8; y++)
+                {
+                    int movementReturn = Move(new int[] { x, y }, false);
+                    if (movementReturn == 0 || movementReturn == 6)
+                    {
+                        availibleMoves.Add($"{ Convert.ToString(Convert.ToChar(x + 97)) }{ Math.Abs(y - 8) }");
+                    }
+                }
+            }
+            return availibleMoves;
         }
 
         public Pawn(String color, int x, int y) : base(color.Equals("White") ? 'p' : 'P', x, y)
